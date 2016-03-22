@@ -32,19 +32,26 @@
                 android:id="@+id/lblProduct"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:labelFor="@+id/txtProduct"
                 android:text="@string/label_product"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/txtProduct"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:inputType="number"
+                android:maxLength="15" />
 
             <ImageButton
                 android:id="@+id/btnScanProduct"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
+                android:gravity="center_vertical"
                 android:scaleType="centerCrop"
                 android:src="@drawable/btn_bar_code_scan" />
 
@@ -52,6 +59,7 @@
                 android:id="@+id/btnSearchProduct"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
+                android:gravity="center_vertical"
                 android:scaleType="centerCrop"
                 android:src="@drawable/btn_search" />
 
@@ -68,13 +76,16 @@
             android:id="@+id/lblLastProducts"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
             android:gravity="center_horizontal"
+            android:padding="2dp"
             android:text="@string/label_last_products"
+            android:textColor="@color/colorAccent"
             android:textSize="20sp"
             android:textStyle="bold" />
 
         <TableLayout
-            android:layout_width="fill_parent"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="3dp">
 
@@ -104,7 +115,8 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/btnProduct01"
                         android:gravity="center_horizontal"
-                        android:text="Casa: Caneca Java"
+                        android:text="Diversos: Caneca Java"
+                        android:textSize="14sp"
                         android:textStyle="bold" />
                 </RelativeLayout>
 
@@ -129,7 +141,8 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/btnProduct02"
                         android:gravity="center_horizontal"
-                        android:text="Brinquedo: Boneco Java"
+                        android:text="Esporte e Lazer: Boneco Java"
+                        android:textSize="14sp"
                         android:textStyle="bold" />
                 </RelativeLayout>
             </TableRow>
@@ -160,7 +173,8 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/btnProduct03"
                         android:gravity="center_horizontal"
-                        android:text="Alimento: Chá de Hortelã"
+                        android:text="Alimentos e Bebidas: Chá de Hortelã"
+                        android:textSize="14sp"
                         android:textStyle="bold" />
                 </RelativeLayout>
 
@@ -185,7 +199,8 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/btnProduct04"
                         android:gravity="center_horizontal"
-                        android:text="Higiene: Creme Dental Colgate"
+                        android:text="Diversos: Creme Dental Colgate"
+                        android:textSize="14sp"
                         android:textStyle="bold" />
                 </RelativeLayout>
 
@@ -218,6 +233,7 @@
                         android:layout_below="@+id/btnProduct05"
                         android:gravity="center_horizontal"
                         android:text="Casa: Porta Retrato Metálico"
+                        android:textSize="14sp"
                         android:textStyle="bold" />
                 </RelativeLayout>
 
@@ -242,7 +258,8 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/btnProduct06"
                         android:gravity="center_horizontal"
-                        android:text="Alimento: Biscoito Amanteigado Aymore"
+                        android:text="Alimentos e Bebidas: Biscoito Amanteigado Aymore"
+                        android:textSize="14sp"
                         android:textStyle="bold" />
                 </RelativeLayout>
 

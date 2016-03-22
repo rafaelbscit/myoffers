@@ -57,6 +57,26 @@ public class StartupApp extends AsyncTask<Void, Integer, Boolean> {
         return progress;
     }
 
+    public StartupApp withCurrProgress(final Integer currProgress) {
+        this.currProgress = currProgress;
+        return this;
+    }
+
+    public StartupApp withMaxProgress(final Integer maxProgress) {
+        this.maxProgress = maxProgress;
+        return this;
+    }
+
+    public StartupApp withOffsetProgress(final Integer offsetProgress) {
+        this.offsetProgress = offsetProgress;
+        return this;
+    }
+
+    public StartupApp withTimeSleep(final Integer timeSleep) {
+        this.timeSleep = timeSleep;
+        return this;
+    }
+
     @Override
     protected void onPreExecute() {
         progress.show();

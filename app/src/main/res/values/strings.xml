@@ -1,6 +1,22 @@
 <resources>
     <string name="app_name">My Offers</string>
     <string name="copyright">Battista Software @ 2016</string>
+    <string name="btn_start">Entre!!!</string>
     <string name="label_product">Produto:</string>
+    <string name="label_name_product">Nome:</string>
+    <string name="label_category">Categoria:</string>
+    <string name="label_vendor">Fornecedor/Loja:</string>
+    <string name="label_brand">Marca:</string>
+    <string name="label_price">Preço (R$):</string>
+    <string name="label_average_price">*¹Preço médio (R$):</string>
+    <string name="label_desc_price">*¹O preço médio é calculado com base no histórico de preço do produto.</string>
     <string name="label_last_products">Últimos produtos</string>
+    <string-array name="categories_array">
+        <item>Alimentos e Bebidas</item>
+        <item>Automóveis</item>
+        <item>Casa</item>
+        <item>Diversos</item>
+        <item>Eletrônicos</item>
+        <item>Esporte e Lazer</item>
+    </string-array>
 </resources>
