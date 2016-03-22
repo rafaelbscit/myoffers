@@ -49,16 +49,16 @@
 
             <ImageButton
                 android:id="@+id/btnScanProduct"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
                 android:gravity="center_vertical"
                 android:scaleType="centerCrop"
                 android:src="@drawable/btn_bar_code_scan" />
 
             <ImageButton
                 android:id="@+id/btnSearchProduct"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
                 android:gravity="center_vertical"
                 android:scaleType="centerCrop"
                 android:src="@drawable/btn_search" />
