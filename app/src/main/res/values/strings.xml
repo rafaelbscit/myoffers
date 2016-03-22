@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">My Offers</string>
+    <string name="copyright">Battista Software @ 2016</string>
+    <string name="label_product">Produto:</string>
+    <string name="label_last_products">Últimos produtos</string>
+</resources>
