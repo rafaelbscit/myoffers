@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -42,7 +42,7 @@
                 android:id="@+id/lblCodeProduct"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5px"
+                android:layout_marginLeft="5dp"
                 android:layout_marginTop="13dp"
                 android:layout_weight="1"
                 android:text="7793100111143"
@@ -194,12 +194,11 @@
                         android:textSize="16sp"
                         android:textStyle="bold" />
 
-                    <TextView
+                    <EditText
                         android:id="@+id/txtPrice"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="numberDecimal"
-                        android:text="30,00" />
+                        android:inputType="numberDecimal" />
 
                 </LinearLayout>
 
@@ -210,8 +209,7 @@
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tblProduct"
-            android:text="@string/label_desc_price"
+            android:text="@string/label_desc_img_product"
             android:textSize="11sp"
             android:textStyle="italic" />
 

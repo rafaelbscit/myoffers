@@ -42,7 +42,7 @@
                 android:id="@+id/lblCodeProduct"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5px"
+                android:layout_marginLeft="5dp"
                 android:layout_marginTop="13dp"
                 android:layout_weight="1"
                 android:text="7793100111143"
@@ -57,18 +57,12 @@
 
         </LinearLayout>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:layout_marginBottom="5dp"
-            android:layout_marginTop="5dp"
-            android:background="@color/colorPrimaryDark" />
-
         <TextView
             android:id="@+id/lblDescProduct"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorPrimary"
+            android:layout_marginTop="5dp"
+            android:background="@color/colorPrimaryDark"
             android:gravity="center_horizontal"
             android:padding="5dp"
             android:text="Caneca Java"
@@ -136,13 +130,33 @@
                     <TextView
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
-                        android:labelFor="@+id/lblCategory"
+                        android:labelFor="@+id/lblBrand"
+                        android:text="@string/label_brand"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/lblBrand"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Caneca" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1px"
+                        android:layout_marginBottom="10dp"
+                        android:background="@color/colorPrimaryDark" />
+
+                    <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:labelFor="@+id/lblVendor"
                         android:text="@string/label_vendor"
                         android:textSize="16sp"
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/lvlVendor"
+                        android:id="@+id/lblVendor"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:text="Nerd Store" />
@@ -165,7 +179,7 @@
                         android:id="@+id/lblAveragePrice"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
-                        android:text="30,00" />
+                        android:text="30.00" />
 
                 </LinearLayout>
 
@@ -176,7 +190,6 @@
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tblProduct"
             android:text="@string/label_desc_price"
             android:textSize="11sp"
             android:textStyle="italic" />

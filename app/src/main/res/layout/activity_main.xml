@@ -65,18 +65,12 @@
 
         </LinearLayout>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:layout_marginBottom="5dp"
-            android:layout_marginTop="5dp"
-            android:background="@color/colorPrimaryDark" />
-
         <TextView
             android:id="@+id/lblLastProducts"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorPrimary"
+            android:layout_marginTop="5dp"
+            android:background="@color/colorPrimaryDark"
             android:gravity="center_horizontal"
             android:padding="2dp"
             android:text="@string/label_last_products"
@@ -106,7 +100,7 @@
                         android:layout_height="100dp"
                         android:layout_centerHorizontal="true"
                         android:elevation="5dp"
-                        android:padding="3dp"
+                        android:padding="2dp"
                         android:scaleType="centerCrop"
                         android:src="@drawable/ex01_produto_caneca_java" />
 
@@ -114,9 +108,8 @@
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/btnProduct01"
-                        android:gravity="center_horizontal"
                         android:text="Diversos: Caneca Java"
-                        android:textSize="14sp"
+                        android:textSize="12sp"
                         android:textStyle="bold" />
                 </RelativeLayout>
 
@@ -132,7 +125,7 @@
                         android:layout_height="100dp"
                         android:layout_centerHorizontal="true"
                         android:elevation="5dp"
-                        android:padding="3dp"
+                        android:padding="2dp"
                         android:scaleType="centerCrop"
                         android:src="@drawable/ex02_produto_boneco_android" />
 
@@ -140,9 +133,8 @@
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/btnProduct02"
-                        android:gravity="center_horizontal"
                         android:text="Esporte e Lazer: Boneco Java"
-                        android:textSize="14sp"
+                        android:textSize="12sp"
                         android:textStyle="bold" />
                 </RelativeLayout>
             </TableRow>
@@ -164,7 +156,7 @@
                         android:layout_height="100dp"
                         android:layout_centerHorizontal="true"
                         android:elevation="5dp"
-                        android:padding="3dp"
+                        android:padding="2dp"
                         android:scaleType="centerCrop"
                         android:src="@drawable/ex03_produto_novo" />
 
@@ -172,9 +164,8 @@
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/btnProduct03"
-                        android:gravity="center_horizontal"
                         android:text="Alimentos e Bebidas: Chá de Hortelã"
-                        android:textSize="14sp"
+                        android:textSize="12sp"
                         android:textStyle="bold" />
                 </RelativeLayout>
 
@@ -190,7 +181,7 @@
                         android:layout_height="100dp"
                         android:layout_centerHorizontal="true"
                         android:elevation="5dp"
-                        android:padding="3dp"
+                        android:padding="2dp"
                         android:scaleType="centerCrop"
                         android:src="@drawable/ex03_produto_novo" />
 
@@ -198,9 +189,8 @@
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/btnProduct04"
-                        android:gravity="center_horizontal"
                         android:text="Diversos: Creme Dental Colgate"
-                        android:textSize="14sp"
+                        android:textSize="12sp"
                         android:textStyle="bold" />
                 </RelativeLayout>
 
@@ -223,7 +213,7 @@
                         android:layout_height="100dp"
                         android:layout_centerHorizontal="true"
                         android:elevation="5dp"
-                        android:padding="3dp"
+                        android:padding="2dp"
                         android:scaleType="centerCrop"
                         android:src="@drawable/ex03_produto_novo" />
 
@@ -231,9 +221,8 @@
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/btnProduct05"
-                        android:gravity="center_horizontal"
                         android:text="Casa: Porta Retrato Metálico"
-                        android:textSize="14sp"
+                        android:textSize="12sp"
                         android:textStyle="bold" />
                 </RelativeLayout>
 
@@ -249,7 +238,7 @@
                         android:layout_height="100dp"
                         android:layout_centerHorizontal="true"
                         android:elevation="5dp"
-                        android:padding="3dp"
+                        android:padding="2dp"
                         android:scaleType="centerCrop"
                         android:src="@drawable/ex03_produto_novo" />
 
@@ -257,9 +246,8 @@
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/btnProduct06"
-                        android:gravity="center_horizontal"
                         android:text="Alimentos e Bebidas: Biscoito Amanteigado Aymore"
-                        android:textSize="14sp"
+                        android:textSize="12sp"
                         android:textStyle="bold" />
                 </RelativeLayout>
 

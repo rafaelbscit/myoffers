@@ -19,12 +19,21 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar((Toolbar) findViewById(R.id.tlbApp));
 
         final Activity currentActivity = this;
-        ImageButton btnEdit01 = (ImageButton) findViewById(R.id.btnProduct01);
-        btnEdit01.setOnClickListener(new View.OnClickListener() {
+        ImageButton btnViewProduct = (ImageButton) findViewById(R.id.btnProduct01);
+        btnViewProduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
                 Log.i("INFO", "Load next activity Product!");
                 startActivity(new Intent(currentActivity, ProductActivity.class));
+            }
+        });
+
+        ImageButton btnSearchProduct = (ImageButton) findViewById(R.id.btnSearchProduct);
+        btnSearchProduct.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                Log.i("INFO", "Load next activity Edit Product!");
+                startActivity(new Intent(currentActivity, EditProductActivity.class));
             }
         });
     }

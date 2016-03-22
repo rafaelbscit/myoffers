@@ -10,6 +10,7 @@
     <string name="label_price">Preço (R$):</string>
     <string name="label_average_price">*¹Preço médio (R$):</string>
     <string name="label_desc_price">*¹O preço médio é calculado com base no histórico de preço do produto.</string>
+    <string name="label_desc_img_product">*Você pode adicionar uma foto do produto ou uma imagem da internet.</string>
     <string name="label_last_products">Últimos produtos</string>
     <string-array name="categories_array">
         <item>Alimentos e Bebidas</item>
