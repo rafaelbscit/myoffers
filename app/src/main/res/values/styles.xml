@@ -13,4 +13,22 @@
         <item name="android:textStyle">bold</item>
     </style>
 
+    <style name="LegendText" parent="@android:style/TextAppearance.Small">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+        <item name="android:fontFamily">sans-serif-light</item>
+    </style>
+
+
+    <style name="BodyLayout">
+        <item name="android:padding">0dp</item>
+        <item name="android:background">@color/backgroundPrimary</item>
+    </style>
+
+    <style name="Toolbar" parent="Widget.AppCompat.Toolbar">
+        <item name="android:padding">4dp</item>
+        <item name="android:elevation">10dp</item>
+        <item name="android:background">@color/colorPrimaryDark</item>
+    </style>
+
 </resources>

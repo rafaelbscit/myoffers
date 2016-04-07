@@ -36,9 +36,7 @@
         android:layout_alignParentRight="true"
         android:layout_margin="10dp"
         android:text="@string/copyright"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="12sp"
-        android:textStyle="italic" />
+        style="@style/LegendText" />
 
 
 </RelativeLayout>
