@@ -9,7 +9,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import br.com.battista.myoffers.task.StartupApp;
+import br.com.battista.myoffers.controller.service.OfferService;
+import br.com.battista.myoffers.view.tasks.StartupApp;
 
 public class StartupActivity extends AppCompatActivity {
 
@@ -17,7 +18,6 @@ public class StartupActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_startup);
-
 
         final Activity currentActivity = this;
         new StartupApp(this, "Iniciando My Offers!") {
@@ -33,6 +33,17 @@ public class StartupActivity extends AppCompatActivity {
                     Log.i("INFO", "Load next activity Main!");
                     startActivity(new Intent(currentActivity, MainActivity.class));
                 }
+            }
+
+            @Override
+            protected Boolean doInBackground(Void... params) {
+                try {
+                    Log.i("Offers", OfferService.getInstance().findOffers().toString());
+                } catch (Exception e) {
+                    Log.e("Error", e.getMessage(), e);
+                    return false;
+                }
+                return true;
             }
         }.withOffsetProgress(20).execute();
 

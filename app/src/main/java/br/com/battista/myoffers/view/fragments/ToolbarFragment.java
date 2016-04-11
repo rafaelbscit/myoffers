@@ -1,4 +1,4 @@
-package br.com.battista.myoffers.fragment;
+package br.com.battista.myoffers.view.fragments;
 
 import android.app.Fragment;
 import android.os.Bundle;

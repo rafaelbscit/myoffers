@@ -1,4 +1,4 @@
-package br.com.battista.myoffers.task;
+package br.com.battista.myoffers.view.tasks;
 
 
 import android.app.Activity;

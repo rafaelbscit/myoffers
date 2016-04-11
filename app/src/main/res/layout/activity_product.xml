@@ -10,7 +10,7 @@
 
     <fragment
         android:id="@+id/fgmMainToolbar"
-        android:name="br.com.battista.myoffers.fragment.ToolbarFragment"
+        android:name="br.com.battista.myoffers.view.fragments.ToolbarFragment"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         tools:layout="@layout/fragment_toolbar" />
