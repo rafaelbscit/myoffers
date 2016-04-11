@@ -1,0 +1,33 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    tools:context=".view.fragments.ProductListFragment">
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:layout_weight="1">
+
+        <ImageButton
+            android:id="@+id/btnProductList"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_centerHorizontal="true"
+            android:elevation="5dp"
+            android:padding="2dp"
+            android:src="@drawable/ex03_produto_novo"
+            android:scaleType="centerCrop" />
+
+        <TextView
+            android:id="@+id/lblProductList"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/btnProductList"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:text="Category: Product Name"/>
+    </RelativeLayout>
+
+</FrameLayout>

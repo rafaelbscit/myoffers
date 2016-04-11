@@ -6,17 +6,22 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.Toast;
 
-import br.com.battista.myoffers.controller.service.OfferService;
+import com.activeandroid.ActiveAndroid;
+
+import br.com.battista.myoffers.controller.facade.OfferFacade;
 import br.com.battista.myoffers.view.tasks.StartupApp;
 
 public class StartupActivity extends AppCompatActivity {
 
+    public static final String TAG_CLASSNAME = StartupActivity.class.getSimpleName();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        ActiveAndroid.initialize(this);
         setContentView(R.layout.activity_startup);
 
         final Activity currentActivity = this;
@@ -25,12 +30,13 @@ public class StartupActivity extends AppCompatActivity {
             protected void onPostExecute(Boolean result) {
                 getProgress().dismiss();
                 if (!result) {
+                    Log.e(TAG_CLASSNAME, "Error loading server data to the application database.");
                     Toast.makeText(currentActivity,
                             String.format("Erro on create app: %s", currentActivity.getTitle()),
                             Toast.LENGTH_LONG).show();
                     currentActivity.finish();
                 } else {
-                    Log.i("INFO", "Load next activity Main!");
+                    Log.i(TAG_CLASSNAME, "Load next activity Main!");
                     startActivity(new Intent(currentActivity, MainActivity.class));
                 }
             }
@@ -38,22 +44,18 @@ public class StartupActivity extends AppCompatActivity {
             @Override
             protected Boolean doInBackground(Void... params) {
                 try {
-                    Log.i("Offers", OfferService.getInstance().findOffers().toString());
+                    new OfferFacade().loadFromServerAndSaveOffers();
                 } catch (Exception e) {
-                    Log.e("Error", e.getMessage(), e);
+                    Log.e(TAG_CLASSNAME, e.getLocalizedMessage(), e);
                     return false;
                 }
                 return true;
             }
         }.withOffsetProgress(20).execute();
+    }
 
-        Button btnStart = (Button) findViewById(R.id.btnStart);
-        btnStart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View arg0) {
-                Log.i("INFO", "Load next activity Main!");
-                startActivity(new Intent(currentActivity, MainActivity.class));
-            }
-        });
+    public void openMainActivity(View view) {
+        Log.i(TAG_CLASSNAME, "Load next activity Main!");
+        startActivity(new Intent(this, MainActivity.class));
     }
 }

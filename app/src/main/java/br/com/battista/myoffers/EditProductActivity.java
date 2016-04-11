@@ -13,6 +13,8 @@ import android.widget.Toast;
 
 public class EditProductActivity extends AppCompatActivity {
 
+    public static final String TAG_CLASSNAME = EditProductActivity.class.getSimpleName();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,7 +27,7 @@ public class EditProductActivity extends AppCompatActivity {
         btnAddProduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
-                Log.i("INFO", "Add new Product!");
+                Log.i(TAG_CLASSNAME, "Add new Product!");
                 Toast.makeText(currentActivity,
                         "Novo produto [X] cadastrado com sucesso!",
                         Toast.LENGTH_SHORT).show();

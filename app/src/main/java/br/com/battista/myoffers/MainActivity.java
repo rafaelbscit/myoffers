@@ -9,7 +9,11 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 
+import br.com.battista.myoffers.controller.facade.OfferFacade;
+
 public class MainActivity extends AppCompatActivity {
+
+    public static final String TAG_CLASSNAME = MainActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,18 +27,21 @@ public class MainActivity extends AppCompatActivity {
         btnViewProduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
-                Log.i("INFO", "Load next activity Product!");
+                Log.i(TAG_CLASSNAME, "Load next activity Product!");
                 startActivity(new Intent(currentActivity, ProductActivity.class));
             }
         });
 
-        ImageButton btnSearchProduct = (ImageButton) findViewById(R.id.btnSearchProduct);
-        btnSearchProduct.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View arg0) {
-                Log.i("INFO", "Load next activity Edit Product!");
-                startActivity(new Intent(currentActivity, EditProductActivity.class));
-            }
-        });
+        Log.i(TAG_CLASSNAME, String.format("Load %s offers by database!",
+                new OfferFacade().loadFromBatabase().size()));
+    }
+
+    public void scanProduct(View view) {
+
+    }
+
+    public void searchProduct(View view) {
+        Log.i(TAG_CLASSNAME, "Load next activity Edit Product!");
+        startActivity(new Intent(this, EditProductActivity.class));
     }
 }

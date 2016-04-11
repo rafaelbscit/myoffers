@@ -11,6 +11,8 @@ import android.widget.ImageButton;
 
 public class ProductActivity extends AppCompatActivity {
 
+    public static final String TAG_CLASSNAME = ProductActivity.class.getSimpleName();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,7 +25,7 @@ public class ProductActivity extends AppCompatActivity {
         btnEditProduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
-                Log.i("INFO", "Load next activity Edit Product!");
+                Log.i(TAG_CLASSNAME, "Load next activity Edit Product!");
                 startActivity(new Intent(currentActivity, EditProductActivity.class));
             }
         });

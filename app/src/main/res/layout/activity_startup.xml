@@ -27,6 +27,7 @@
         android:text="@string/btn_start"
         android:textColor="@color/colorAccent"
         android:textSize="24dp"
+        android:onClick="openMainActivity"
         android:textStyle="bold" />
 
     <TextView
