@@ -118,12 +118,12 @@ public class StartupApp extends AsyncTask<Void, Integer, Boolean> {
 
     @Override
     protected void onPostExecute(Boolean result) {
-        progress.dismiss();
         if (!result) {
             Toast.makeText(activity,
                     String.format("Erro on create activity: %s", activity.getTitle()),
                     Toast.LENGTH_LONG).show();
             activity.finish();
         }
+        progress.dismiss();
     }
 }

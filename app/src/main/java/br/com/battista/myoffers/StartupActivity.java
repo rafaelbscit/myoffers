@@ -10,7 +10,7 @@ import android.widget.Toast;
 
 import com.activeandroid.ActiveAndroid;
 
-import br.com.battista.myoffers.controller.facade.OfferFacade;
+import br.com.battista.myoffers.controller.OfferController;
 import br.com.battista.myoffers.view.tasks.StartupApp;
 
 public class StartupActivity extends AppCompatActivity {
@@ -44,7 +44,7 @@ public class StartupActivity extends AppCompatActivity {
             @Override
             protected Boolean doInBackground(Void... params) {
                 try {
-                    new OfferFacade().loadFromServerAndSaveOffers();
+                    new OfferController().loadFromServerAndSaveOffers();
                 } catch (Exception e) {
                     Log.e(TAG_CLASSNAME, e.getLocalizedMessage(), e);
                     return false;

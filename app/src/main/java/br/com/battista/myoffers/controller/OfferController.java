@@ -1,4 +1,4 @@
-package br.com.battista.myoffers.controller.facade;
+package br.com.battista.myoffers.controller;
 
 
 import com.activeandroid.ActiveAndroid;
@@ -11,13 +11,13 @@ import br.com.battista.myoffers.controller.service.OfferService;
 import br.com.battista.myoffers.database.repository.OfferRepository;
 import br.com.battista.myoffers.model.Offer;
 
-public class OfferFacade {
+public class OfferController {
 
-    public static final String TAG_CLASSNAME = OfferFacade.class.getSimpleName();
+    public static final String TAG_CLASSNAME = OfferController.class.getSimpleName();
     private OfferService service;
     private OfferRepository repository;
 
-    public OfferFacade() {
+    public OfferController() {
         service = OfferService.getInstance();
         repository = new OfferRepository();
     }
@@ -41,6 +41,26 @@ public class OfferFacade {
 
     }
 
+    public Boolean loadFromServerAndSaveOffer(Long codeProduct) {
+        Log.i(TAG_CLASSNAME,
+                String.format("Find offer by code:%s from server and stored in the app database.",
+                        codeProduct));
+        Offer offer = service.findByCodeProduct(codeProduct);
+        if (offer == null || offer.getId() == null) {
+            Log.i(TAG_CLASSNAME,
+                    String.format("Not found offer with code:%s in server!", codeProduct));
+            return Boolean.FALSE;
+        }
+        BriteDatabase.Transaction transaction = ActiveAndroid.beginTransaction();
+        try {
+            Log.i(TAG_CLASSNAME, String.format("Save offer with id:%s in database!", offer.getId()));
+            repository.save(offer);
+        } finally {
+            ActiveAndroid.endTransaction(transaction);
+        }
+        return Boolean.TRUE;
+    }
+
     public List<Offer> loadFromBatabase() {
         List<Offer> offers = repository.findAll();
         Log.i(TAG_CLASSNAME, String.format("Retrieves %s offers from database.", offers.size()));
@@ -55,6 +75,17 @@ public class OfferFacade {
                     offer.getId()));
         } else {
             Log.i(TAG_CLASSNAME, String.format("Not found offer with id: %s.", id));
+        }
+        return offer;
+    }
+
+    public Offer loadFromDatabaseByCodeProduct(Long codeProduct) {
+        Offer offer = repository.findByCodeProduct(codeProduct);
+        if (offer != null) {
+            Log.i(TAG_CLASSNAME, String.format("Retrieve offer by code: %s from database.",
+                    offer.getId()));
+        } else {
+            Log.i(TAG_CLASSNAME, String.format("Not found offer with code: %s.", codeProduct));
         }
         return offer;
     }

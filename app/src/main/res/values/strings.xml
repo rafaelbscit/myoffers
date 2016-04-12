@@ -8,6 +8,7 @@
     <string name="label_vendor">Fornecedor/Loja:</string>
     <string name="label_brand">Marca:</string>
     <string name="label_price">Preço (R$):</string>
+    <string name="label_updated_at">Atualizado em:</string>
     <string name="label_average_price">*¹Preço médio (R$):</string>
     <string name="label_desc_price">*¹O preço médio é calculado com base no histórico de preço do produto.</string>
     <string name="label_desc_img_product">*Você pode adicionar uma foto do produto ou uma imagem da internet.</string>
@@ -23,5 +24,8 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="label_button_add">Adicionar</string>
+    <string name="label_button_cancel">Cancelar</string>
+    <string name="label_button_edit">Editar</string>
 
 </resources>

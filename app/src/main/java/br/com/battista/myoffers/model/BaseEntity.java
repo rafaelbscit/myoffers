@@ -18,7 +18,7 @@ public abstract class BaseEntity extends Model implements Serializable {
     @Column(name = MyOffersContract.OfferEntry.COLUMN_NAME_CREATED_AT, notNull = true)
     private Date createdAt;
 
-    @Column(name = MyOffersContract.OfferEntry.COLUMN_NAME_UPDATE_AT, notNull = true, index = true)
+    @Column(name = MyOffersContract.OfferEntry.COLUMN_NAME_UPDATED_AT, notNull = true, index = true)
     private Date updatedAt;
 
     @Column(name = MyOffersContract.OfferEntry.COLUMN_NAME_VERSION, notNull = true, index = true)

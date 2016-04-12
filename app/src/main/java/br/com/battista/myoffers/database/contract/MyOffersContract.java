@@ -10,7 +10,7 @@ public class MyOffersContract {
     private static abstract class BaseEntry implements BaseColumns {
 
         public static final String COLUMN_NAME_CREATED_AT = "createdAt";
-        public static final String COLUMN_NAME_UPDATE_AT = "updatedAt";
+        public static final String COLUMN_NAME_UPDATED_AT = "updatedAt";
         public static final String COLUMN_NAME_VERSION = "version";
     }
 

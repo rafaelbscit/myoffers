@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     style="@style/BodyLayout"
     android:layout_width="match_parent"
@@ -17,7 +16,7 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -49,13 +48,6 @@
                     android:layout_weight="1"
                     android:text="7793100111143"
                     android:textSize="16sp" />
-
-                <ImageButton
-                    android:id="@+id/btnAddProduct"
-                    android:layout_width="45dp"
-                    android:layout_height="45dp"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/btn_add_product" />
 
             </LinearLayout>
 
@@ -218,5 +210,35 @@
         </LinearLayout>
 
     </ScrollView>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_alignParentBottom="true">
+
+            <Button
+                style="@style/ButtonAction"
+                android:layout_marginLeft="8dp"
+                android:onClick="cancelEditProduct"
+                android:drawableLeft="@drawable/btn_remove_product"
+                android:text="@string/label_button_cancel" />
+
+            <View
+                android:layout_width="4dp"
+                android:layout_height="wrap_content" />
+
+            <Button
+                style="@style/ButtonAction"
+                android:layout_marginLeft="8dp"
+                android:drawableLeft="@drawable/btn_add_product"
+                android:text="@string/label_button_add" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
 
 </LinearLayout>

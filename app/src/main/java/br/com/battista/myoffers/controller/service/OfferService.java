@@ -55,4 +55,25 @@ public class OfferService {
         }
         return offers;
     }
+
+    public Offer findByCodeProduct(Long codeProduct) {
+        Log.i(TAG_CLASSNAME, String.format("Retrieve offer with code:%s in rest server:[%s]!",
+                codeProduct, RestConstant.REST_API_ENDPOINT));
+        Offer offer = null;
+        OfferListener listener = builder.create(OfferListener.class);
+        try {
+            Response<Offer> response = listener.findByCodeProduct(codeProduct).execute();
+            if (response != null && response.code() == HttpStatus.OK.value()) {
+                offer = response.body();
+                Log.i(TAG_CLASSNAME, String.format("Found offer with id:%s!", offer.getId()));
+            } else {
+                HttpStatus httpStatus = HttpStatus.valueOf(response.code());
+                Log.i(TAG_CLASSNAME, String.format("Not found offer, return to code: %s and reason: %s!",
+                        httpStatus.value(), httpStatus.getReasonPhrase()));
+            }
+        } catch (IOException e) {
+            Log.e(TAG_CLASSNAME, e.getLocalizedMessage(), e);
+        }
+        return offer;
+    }
 }

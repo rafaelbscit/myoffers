@@ -5,13 +5,13 @@ import com.activeandroid.util.Log;
 
 import java.util.List;
 
-import br.com.battista.myoffers.controller.facade.OfferFacade;
+import br.com.battista.myoffers.controller.OfferController;
 import br.com.battista.myoffers.database.contract.MyOffersContract;
 import br.com.battista.myoffers.model.Offer;
 
 public class OfferRepository implements BaseRepository<Offer> {
 
-    public static final String TAG_CLASSNAME = OfferFacade.class.getSimpleName();
+    public static final String TAG_CLASSNAME = OfferController.class.getSimpleName();
 
     @Override
     public void save(Offer entity) {
@@ -32,6 +32,14 @@ public class OfferRepository implements BaseRepository<Offer> {
                 .executeSingle();
     }
 
+    public Offer findByCodeProduct(Long codeProduct) {
+        Log.i(TAG_CLASSNAME, String.format("Find offer by code: %s.", codeProduct));
+        return new Select()
+                .from(Offer.class)
+                .where("codeProduct = ?", codeProduct)
+                .executeSingle();
+    }
+
     @Override
     public void update(Offer entity) {
 
@@ -47,7 +55,7 @@ public class OfferRepository implements BaseRepository<Offer> {
         Log.i(TAG_CLASSNAME, "Find all offers.");
         return new Select()
                 .from(Offer.class)
-                .orderBy(MyOffersContract.OfferEntry.COLUMN_NAME_UPDATE_AT + " ASC")
+                .orderBy(MyOffersContract.OfferEntry.COLUMN_NAME_UPDATED_AT + " DESC")
                 .execute();
     }
 }
