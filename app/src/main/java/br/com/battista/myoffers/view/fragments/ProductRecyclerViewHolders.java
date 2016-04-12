@@ -52,6 +52,8 @@ public class ProductRecyclerViewHolders extends RecyclerView.ViewHolder implemen
         Bundle args = new Bundle();
         args.putLong(ViewConstant.PARAM_ID_PRODUCT, getIdProduct());
 
-        context.startActivity(new Intent(context, ProductActivity.class), args);
+        Intent intent = new Intent(context, ProductActivity.class);
+        intent.putExtras(args);
+        context.startActivity(intent, args);
     }
 }

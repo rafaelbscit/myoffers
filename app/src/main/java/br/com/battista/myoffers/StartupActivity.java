@@ -25,10 +25,9 @@ public class StartupActivity extends AppCompatActivity {
         setContentView(R.layout.activity_startup);
 
         final Activity currentActivity = this;
-        new StartupApp(this, "Iniciando My Offers!") {
+        new StartupApp(this, "Iniciando My Offers!", false) {
             @Override
             protected void onPostExecute(Boolean result) {
-                getProgress().dismiss();
                 if (!result) {
                     Log.e(TAG_CLASSNAME, "Error loading server data to the application database.");
                     Toast.makeText(currentActivity,
@@ -39,6 +38,7 @@ public class StartupActivity extends AppCompatActivity {
                     Log.i(TAG_CLASSNAME, "Load next activity Main!");
                     startActivity(new Intent(currentActivity, MainActivity.class));
                 }
+                getProgress().dismiss();
             }
 
             @Override
@@ -51,7 +51,7 @@ public class StartupActivity extends AppCompatActivity {
                 }
                 return true;
             }
-        }.withOffsetProgress(20).execute();
+        }.execute();
     }
 
     public void openMainActivity(View view) {
