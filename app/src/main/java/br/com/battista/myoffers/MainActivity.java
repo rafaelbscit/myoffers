@@ -1,19 +1,25 @@
 package br.com.battista.myoffers;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
-import android.widget.ImageButton;
 
+import java.util.List;
+
+import br.com.battista.myoffers.constants.ViewConstant;
 import br.com.battista.myoffers.controller.facade.OfferFacade;
+import br.com.battista.myoffers.model.Offer;
+import br.com.battista.myoffers.view.fragments.ProductRecyclerViewAdapter;
 
 public class MainActivity extends AppCompatActivity {
 
     public static final String TAG_CLASSNAME = MainActivity.class.getSimpleName();
+    private GridLayoutManager gridLayoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,18 +28,35 @@ public class MainActivity extends AppCompatActivity {
 
         setSupportActionBar((Toolbar) findViewById(R.id.tlbApp));
 
-        final Activity currentActivity = this;
-        ImageButton btnViewProduct = (ImageButton) findViewById(R.id.btnProduct01);
-        btnViewProduct.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View arg0) {
-                Log.i(TAG_CLASSNAME, "Load next activity Product!");
-                startActivity(new Intent(currentActivity, ProductActivity.class));
-            }
-        });
+        List<Offer> offers = loadDataFromDatabase();
+        configureUI(offers);
 
-        Log.i(TAG_CLASSNAME, String.format("Load %s offers by database!",
-                new OfferFacade().loadFromBatabase().size()));
+    }
+
+    private List<Offer> loadDataFromDatabase() {
+        List<Offer> offers = new OfferFacade().loadFromBatabase();
+        Log.i(TAG_CLASSNAME, String.format("Load %s offers by database!", offers.size()));
+        offers = filterSizeListProducts(offers);
+        return offers;
+    }
+
+    private void configureUI(List<Offer> offers) {
+        gridLayoutManager = new GridLayoutManager(MainActivity.this, 2);
+
+        RecyclerView recyclerView
+                = (RecyclerView) findViewById(R.id.rvwListProduct);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(gridLayoutManager);
+
+        ProductRecyclerViewAdapter recyclerViewAdapter = new ProductRecyclerViewAdapter(this, offers);
+        recyclerView.setAdapter(recyclerViewAdapter);
+    }
+
+    private List<Offer> filterSizeListProducts(List<Offer> offers) {
+        if (offers.size() > ViewConstant.MAX_PRODUCTS_GRID) {
+            return offers.subList(0, ViewConstant.MAX_PRODUCTS_GRID);
+        }
+        return offers;
     }
 
     public void scanProduct(View view) {

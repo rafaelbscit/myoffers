@@ -47,4 +47,15 @@ public class OfferFacade {
 
         return offers;
     }
+
+    public Offer loadFromDatabaseById(Long id) {
+        Offer offer = repository.findById(id);
+        if (offer != null) {
+            Log.i(TAG_CLASSNAME, String.format("Retrieve offer by id: %s from database.",
+                    offer.getId()));
+        } else {
+            Log.i(TAG_CLASSNAME, String.format("Not found offer with id: %s.", id));
+        }
+        return offer;
+    }
 }

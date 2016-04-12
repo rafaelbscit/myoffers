@@ -53,8 +53,8 @@
                     android:layout_width="45dp"
                     android:layout_height="45dp"
                     android:gravity="center_vertical"
-                    android:scaleType="centerCrop"
                     android:onClick="scanProduct"
+                    android:scaleType="centerCrop"
                     android:src="@drawable/btn_bar_code_scan" />
 
                 <ImageButton
@@ -62,8 +62,8 @@
                     android:layout_width="45dp"
                     android:layout_height="45dp"
                     android:gravity="center_vertical"
-                    android:scaleType="centerCrop"
                     android:onClick="searchProduct"
+                    android:scaleType="centerCrop"
                     android:src="@drawable/btn_search" />
 
             </LinearLayout>
@@ -81,38 +81,12 @@
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
-            <TableLayout
-                android:id="@+id/tblListProducts"
+            <android.support.v7.widget.RecyclerView xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/rvwListProduct"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp">
-
-                <TableRow
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:weightSum="2">
-
-                    <fragment
-                        android:id="@+id/fmgProduct01"
-                        android:name="br.com.battista.myoffers.view.fragments.ProductListFragment"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="5dp"
-                        android:layout_weight="1"
-                        tools:layout="@layout/fragment_product_list" />
-
-                    <fragment
-                        android:id="@+id/fmgProduct02"
-                        android:name="br.com.battista.myoffers.view.fragments.ProductListFragment"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="5dp"
-                        android:layout_weight="1"
-                        tools:layout="@layout/fragment_product_list" />
-
-                </TableRow>
-
-            </TableLayout>
+                android:layout_height="match_parent"
+                app:layoutManager="GridLayoutManager"
+                tools:listitem="@layout/fragment_product" />
 
         </LinearLayout>
 
