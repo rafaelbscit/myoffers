@@ -52,7 +52,7 @@ public class ProductActivity extends AppCompatActivity {
             fillDataUI(offer);
         } else {
             Toast.makeText(this, "O produto não foi localizado, favor tentar novamente!",
-                    Toast.LENGTH_LONG);
+                    Toast.LENGTH_LONG).show();
         }
     }
 
@@ -95,7 +95,7 @@ public class ProductActivity extends AppCompatActivity {
             startEditProductActivity(offer.getId());
         } else {
             Toast.makeText(this, "O produto não foi localizado, favor tentar novamente!",
-                    Toast.LENGTH_LONG);
+                    Toast.LENGTH_LONG).show();
         }
     }
 

@@ -16,4 +16,6 @@ public interface BaseRepository<Entity extends BaseEntity> {
     void deleteById(Long id);
 
     List<Entity> findAll();
+
+    void deleteAll();
 }

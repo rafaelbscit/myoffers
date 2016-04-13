@@ -24,8 +24,8 @@ import br.com.battista.myoffers.view.tasks.StartupApp;
 public class MainActivity extends AppCompatActivity {
 
     public static final String TAG_CLASSNAME = MainActivity.class.getSimpleName();
-    private GridLayoutManager gridLayoutManager;
     private EditText txtProduct;
+    private RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +34,15 @@ public class MainActivity extends AppCompatActivity {
 
         setSupportActionBar((Toolbar) findViewById(R.id.tlbApp));
 
+        createUiView();
+    }
+
+    private void createUiView() {
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(MainActivity.this, 2);
+
+        recyclerView = (RecyclerView) findViewById(R.id.rvwListProduct);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(gridLayoutManager);
     }
 
     @Override
@@ -52,17 +61,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void configureUI(List<Offer> offers) {
-        gridLayoutManager = new GridLayoutManager(MainActivity.this, 2);
-
-        RecyclerView recyclerView
-                = (RecyclerView) findViewById(R.id.rvwListProduct);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(gridLayoutManager);
-
-        ProductRecyclerViewAdapter recyclerViewAdapter =
-                new ProductRecyclerViewAdapter(this, offers);
-        recyclerViewAdapter.notifyDataSetChanged();
+        ProductRecyclerViewAdapter recyclerViewAdapter = new ProductRecyclerViewAdapter(this, offers);
         recyclerView.setAdapter(recyclerViewAdapter);
+        recyclerViewAdapter.notifyDataSetChanged();
     }
 
     private List<Offer> filterSizeListProducts(List<Offer> offers) {

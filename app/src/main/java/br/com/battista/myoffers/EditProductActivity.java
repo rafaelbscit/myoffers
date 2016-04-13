@@ -59,14 +59,18 @@ public class EditProductActivity extends AppCompatActivity {
     }
 
     private void checkEditProduct() {
-        Long id = getIntent().getExtras().getLong(ViewConstant.PARAM_ID_PRODUCT, 0l);
+        Long id = getIntent().getExtras().getLong(ViewConstant.PARAM_ID_PRODUCT);
+        if (id == null || id == 0) {
+            return;
+        }
+
         Offer offerDB = new OfferController().loadFromDatabaseById(id);
         if (offerDB != null && offerDB.getCodeProduct() > 0l) {
             offer = offerDB;
             fillDataUI(offerDB);
         } else {
             Toast.makeText(this, "O produto não foi localizado, favor tentar novamente!",
-                    Toast.LENGTH_LONG);
+                    Toast.LENGTH_LONG).show();
         }
     }
 

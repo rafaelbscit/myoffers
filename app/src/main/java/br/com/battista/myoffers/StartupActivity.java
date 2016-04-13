@@ -21,6 +21,7 @@ public class StartupActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        deleteDatabase("MyOffers.db");
         ActiveAndroid.initialize(this);
         setContentView(R.layout.activity_startup);
 

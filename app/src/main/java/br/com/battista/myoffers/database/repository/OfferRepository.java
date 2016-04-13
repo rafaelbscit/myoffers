@@ -1,5 +1,6 @@
 package br.com.battista.myoffers.database.repository;
 
+import com.activeandroid.query.Delete;
 import com.activeandroid.query.Select;
 import com.activeandroid.util.Log;
 
@@ -56,6 +57,13 @@ public class OfferRepository implements BaseRepository<Offer> {
         return new Select()
                 .from(Offer.class)
                 .orderBy(MyOffersContract.OfferEntry.COLUMN_NAME_UPDATED_AT + " DESC")
+                .execute();
+    }
+
+    @Override
+    public void deleteAll() {
+        new Delete()
+                .from(Offer.class)
                 .execute();
     }
 }

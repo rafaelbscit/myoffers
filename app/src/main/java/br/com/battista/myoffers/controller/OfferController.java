@@ -35,6 +35,7 @@ public class OfferController {
                     ActiveAndroid.setTransactionSuccessful(transaction);
                 }
             }
+            ActiveAndroid.setTransactionSuccessful(transaction);
         } finally {
             ActiveAndroid.endTransaction(transaction);
         }
@@ -103,6 +104,7 @@ public class OfferController {
         try {
             Log.i(TAG_CLASSNAME, String.format("Save offer with id:%s in database!", offer.getId()));
             repository.save(offer);
+            ActiveAndroid.setTransactionSuccessful(transaction);
         } finally {
             ActiveAndroid.endTransaction(transaction);
         }
