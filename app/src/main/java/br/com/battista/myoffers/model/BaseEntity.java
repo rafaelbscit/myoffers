@@ -8,7 +8,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import java.util.Date;
 
-import br.com.battista.myoffers.constants.EntityConstant;
 import br.com.battista.myoffers.database.contract.MyOffersContract;
 
 @JsonAutoDetect
@@ -53,12 +52,6 @@ public abstract class BaseEntity extends Model implements Serializable {
     public BaseEntity version(final Long version) {
         this.version = version;
         return this;
-    }
-
-    public void initEntity() {
-        createdAt = new Date();
-        updatedAt = createdAt;
-        version = EntityConstant.DEFAULT_VERSION;
     }
 
 }

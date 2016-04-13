@@ -76,4 +76,24 @@ public class OfferService {
         }
         return offer;
     }
+
+    public Offer createOffer(Offer offer) {
+        Log.i(TAG_CLASSNAME, String.format("Create offer with code:%s in rest server:[%s]!",
+                offer.getCodeProduct(), RestConstant.REST_API_ENDPOINT));
+        OfferListener listener = builder.create(OfferListener.class);
+        try {
+            Response<Offer> response = listener.createOffer(offer).execute();
+            if (response != null && response.code() == HttpStatus.OK.value()) {
+                Log.i(TAG_CLASSNAME, "Succeeded in creating a new offer!");
+                return response.body();
+            } else {
+                HttpStatus httpStatus = HttpStatus.valueOf(response.code());
+                Log.i(TAG_CLASSNAME, String.format("Error in creating a new offer, return to code: %s and reason: %s!",
+                        httpStatus.value(), httpStatus.getReasonPhrase()));
+            }
+        } catch (IOException e) {
+            Log.e(TAG_CLASSNAME, e.getLocalizedMessage(), e);
+        }
+        return offer;
+    }
 }

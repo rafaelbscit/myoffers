@@ -23,21 +23,21 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:background="@color/colorPrimary"
+        android:onClick="openMainActivity"
         android:padding="5dp"
         android:text="@string/btn_start"
         android:textColor="@color/colorAccent"
         android:textSize="24dp"
-        android:onClick="openMainActivity"
         android:textStyle="bold" />
 
     <TextView
+        style="@style/LegendText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_margin="10dp"
-        android:text="@string/copyright"
-        style="@style/LegendText" />
+        android:text="@string/copyright" />
 
 
 </RelativeLayout>

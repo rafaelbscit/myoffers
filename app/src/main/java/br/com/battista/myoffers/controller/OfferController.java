@@ -31,7 +31,7 @@ public class OfferController {
             for (int count = 0; count < offers.size(); count++) {
                 Offer offer = offers.get(count);
                 repository.save(offer);
-                if (count % 10 == 0) {
+                if (count % 10 == 0 && count> 1) {
                     ActiveAndroid.setTransactionSuccessful(transaction);
                 }
             }
@@ -51,13 +51,7 @@ public class OfferController {
                     String.format("Not found offer with code:%s in server!", codeProduct));
             return Boolean.FALSE;
         }
-        BriteDatabase.Transaction transaction = ActiveAndroid.beginTransaction();
-        try {
-            Log.i(TAG_CLASSNAME, String.format("Save offer with id:%s in database!", offer.getId()));
-            repository.save(offer);
-        } finally {
-            ActiveAndroid.endTransaction(transaction);
-        }
+        saveOfferInDatabase(offer);
         return Boolean.TRUE;
     }
 
@@ -88,5 +82,29 @@ public class OfferController {
             Log.i(TAG_CLASSNAME, String.format("Not found offer with code: %s.", codeProduct));
         }
         return offer;
+    }
+
+    public Offer createNewOfferInServerAndDatabase(Offer offer) {
+        Log.i(TAG_CLASSNAME, String.format("Create new offer [%s] in server.",
+                offer));
+        offer = service.createOffer(offer);
+        if (offer != null && offer.getId() != null) {
+            Log.i(TAG_CLASSNAME, String.format("Save new offer with id: %s in database.",
+                    offer.getId()));
+            saveOfferInDatabase(offer);
+        } else {
+            Log.i(TAG_CLASSNAME, String.format("Error in creating a new offer with code: %s.", offer.getCodeProduct()));
+        }
+        return offer;
+    }
+
+    private void saveOfferInDatabase(Offer offer) {
+        BriteDatabase.Transaction transaction = ActiveAndroid.beginTransaction();
+        try {
+            Log.i(TAG_CLASSNAME, String.format("Save offer with id:%s in database!", offer.getId()));
+            repository.save(offer);
+        } finally {
+            ActiveAndroid.endTransaction(transaction);
+        }
     }
 }

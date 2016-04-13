@@ -126,10 +126,8 @@ public enum HttpStatus {
         }
 
         public int value() {
-            return this.value;
-        }
-
-        public static HttpStatus.Series valueOf(int status) {
+            return this.val
+f(int status) {
             int seriesCode = status / 100;
             HttpStatus.Series[] arr$ = values();
             int len$ = arr$.length;
@@ -144,7 +142,11 @@ public enum HttpStatus {
             throw new IllegalArgumentException("No matching constant for [" + status + "]");
         }
 
-        public static HttpStatus.Series valueOf(HttpStatus status) {
+        public static HttpStatus.Series valueOf(HttpStat
+ue;
+        }
+
+        public static HttpStatus.Series valueOus status) {
             return valueOf(status.value);
         }
     }
