@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.activeandroid.util.Log;
 
 import java.text.NumberFormat;
+import java.text.ParseException;
 import java.util.Locale;
 
 import br.com.battista.myoffers.constants.ViewConstant;
@@ -25,6 +26,7 @@ import br.com.battista.myoffers.view.tasks.StartupApp;
 public class EditProductActivity extends AppCompatActivity {
 
     public static final String TAG_CLASSNAME = EditProductActivity.class.getSimpleName();
+    private Locale locale = new Locale("pt", "BR");
     private TextView lblCodeProduct;
 
     private EditText txtNameProduct;
@@ -132,7 +134,6 @@ public class EditProductActivity extends AppCompatActivity {
         txtBrand.setText(offer.getBrand());
         txtVendor.setText(offer.getVendor());
 
-        Locale locale = new Locale("pt", "BR");
         String price = NumberFormat.getNumberInstance(locale).format(offer.getPrice());
         txtAveragePrice.setText(price);
 
@@ -155,7 +156,13 @@ public class EditProductActivity extends AppCompatActivity {
         offer.setCategory(String.valueOf(spnCategory.getSelectedItem()));
         offer.setBrand(txtBrand.getText().toString());
         offer.setVendor(txtVendor.getText().toString());
-        offer.setPrice(Double.valueOf(txtAveragePrice.getText().toString()));
+        String strPrice = txtAveragePrice.getText().toString();
+        try {
+            Number number = NumberFormat.getNumberInstance(locale).parse(strPrice);
+            offer.setPrice(number.doubleValue());
+        } catch (ParseException e) {
+            offer.setPrice(Double.valueOf(strPrice.replaceAll("\\,", "\\.")));
+        }
 
         return offer;
     }
