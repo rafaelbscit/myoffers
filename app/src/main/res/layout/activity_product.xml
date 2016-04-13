@@ -236,6 +236,7 @@
 
             <Button
                 style="@style/ButtonAction"
+                android:onClick="editViewProduct"
                 android:layout_marginLeft="8dp"
                 android:drawableLeft="@drawable/btn_edit_product"
                 android:text="@string/label_button_edit" />

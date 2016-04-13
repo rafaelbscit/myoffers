@@ -14,6 +14,9 @@ import android.widget.Toast;
 
 import com.activeandroid.util.Log;
 
+import java.text.NumberFormat;
+import java.util.Locale;
+
 import br.com.battista.myoffers.constants.ViewConstant;
 import br.com.battista.myoffers.controller.OfferController;
 import br.com.battista.myoffers.model.Offer;
@@ -31,6 +34,7 @@ public class EditProductActivity extends AppCompatActivity {
     private EditText txtAveragePrice;
 
     private Offer offer = null;
+    private ArrayAdapter<CharSequence> adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,24 +44,40 @@ public class EditProductActivity extends AppCompatActivity {
         setSupportActionBar((Toolbar) findViewById(R.id.tlbApp));
         fillCategories();
 
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        loadUIViews();
+        reloadCodeProduct();
+        checkEditProduct();
+
+    }
+
+    private void checkEditProduct() {
+        Long id = getIntent().getExtras().getLong(ViewConstant.PARAM_ID_PRODUCT, 0l);
+        Offer offerDB = new OfferController().loadFromDatabaseById(id);
+        if (offerDB != null && offerDB.getCodeProduct() > 0l) {
+            offer = offerDB;
+            fillDataUI(offerDB);
+        } else {
+            Toast.makeText(this, "O produto não foi localizado, favor tentar novamente!",
+                    Toast.LENGTH_LONG);
+        }
+    }
+
+    private void reloadCodeProduct() {
         Long codeProduct = getIntent().getExtras().getLong(ViewConstant.PARAM_CODE_PRODUCT, 0l);
         lblCodeProduct = (TextView) findViewById(R.id.lblCodeProduct);
         lblCodeProduct.setText(String.valueOf(codeProduct));
-        offer = null;
-    }
-
-    private void startProductActivity(Offer offer) {
-        Bundle args = new Bundle();
-        args.putLong(ViewConstant.PARAM_ID_PRODUCT, offer.getId());
-
-        Intent intent = new Intent(this, ProductActivity.class);
-        intent.putExtras(args);
-        startActivity(intent, args);
+        offer = new Offer();
     }
 
     private void fillCategories() {
         Spinner spinner = (Spinner) findViewById(R.id.spnCategory);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+        adapter = ArrayAdapter.createFromResource(this,
                 R.array.categories_array, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
@@ -102,29 +122,39 @@ public class EditProductActivity extends AppCompatActivity {
             }
         }.execute();
 
+    }
 
+    private void fillDataUI(Offer offer) {
+        lblCodeProduct.setText(String.valueOf(offer.getCodeProduct()));
+        txtNameProduct.setText(offer.getName());
+
+        spnCategory.setSelection(adapter.getPosition(offer.getCategory()), true);
+        txtBrand.setText(offer.getBrand());
+        txtVendor.setText(offer.getVendor());
+
+        Locale locale = new Locale("pt", "BR");
+        String price = NumberFormat.getNumberInstance(locale).format(offer.getPrice());
+        txtAveragePrice.setText(price);
+
+    }
+
+    private void loadUIViews() {
+        lblCodeProduct = (TextView) findViewById(R.id.lblCodeProduct);
+        txtNameProduct = (EditText) findViewById(R.id.txtNameProduct);
+        spnCategory = (Spinner) findViewById(R.id.spnCategory);
+        txtBrand = (EditText) findViewById(R.id.txtBrand);
+        txtVendor = (EditText) findViewById(R.id.txtVendor);
+        txtAveragePrice = (EditText) findViewById(R.id.txtPrice);
     }
 
     private Offer fillOfferByData() {
         Log.i(TAG_CLASSNAME, "Create new offer from activity data!");
-        Offer offer = new Offer();
 
-        lblCodeProduct = (TextView) findViewById(R.id.lblCodeProduct);
         offer.setCodeProduct(Long.valueOf(lblCodeProduct.getText().toString()));
-
-        txtNameProduct = (EditText) findViewById(R.id.txtNameProduct);
         offer.setName(txtNameProduct.getText().toString());
-
-        spnCategory = (Spinner) findViewById(R.id.spnCategory);
         offer.setCategory(String.valueOf(spnCategory.getSelectedItem()));
-
-        txtBrand = (EditText) findViewById(R.id.txtBrand);
         offer.setBrand(txtBrand.getText().toString());
-
-        txtVendor = (EditText) findViewById(R.id.txtVendor);
         offer.setVendor(txtVendor.getText().toString());
-
-        txtAveragePrice = (EditText) findViewById(R.id.txtPrice);
         offer.setPrice(Double.valueOf(txtAveragePrice.getText().toString()));
 
         return offer;

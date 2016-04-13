@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.format.DateFormat;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -38,6 +39,12 @@ public class ProductActivity extends AppCompatActivity {
 
         setSupportActionBar((Toolbar) findViewById(R.id.tlbApp));
 
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
         Offer offer = loadDataFromDatabase();
         if (offer != null) {
             codeProduct = offer.getCodeProduct();
@@ -65,25 +72,12 @@ public class ProductActivity extends AppCompatActivity {
 
     private void loadUIViews() {
         lblCodeProduct = (TextView) findViewById(R.id.lblCodeProduct);
-        lblCodeProduct.setText("");
-
         lblNameProduct = (TextView) findViewById(R.id.lblNameProduct);
-        lblNameProduct.setText("");
-
         lblCategory = (TextView) findViewById(R.id.lblCategory);
-        lblCategory.setText("");
-
         lblBrand = (TextView) findViewById(R.id.lblBrand);
-        lblBrand.setText("");
-
         lblVendor = (TextView) findViewById(R.id.lblVendor);
-        lblVendor.setText("");
-
         lblUpdatedAt = (TextView) findViewById(R.id.lblUpdatedAt);
-        lblUpdatedAt.setText("");
-
         lblAveragePrice = (TextView) findViewById(R.id.lblAveragePrice);
-        lblAveragePrice.setText("");
     }
 
     private Offer loadDataFromDatabase() {
@@ -93,5 +87,25 @@ public class ProductActivity extends AppCompatActivity {
 
     public void cancelViewProduct(View view) {
         startActivity(new Intent(this, MainActivity.class));
+    }
+
+    public void editViewProduct(View view) {
+        Offer offer = new OfferController().loadFromDatabaseByCodeProduct(codeProduct);
+        if (offer.getId() != null) {
+            startEditProductActivity(offer.getId());
+        } else {
+            Toast.makeText(this, "O produto não foi localizado, favor tentar novamente!",
+                    Toast.LENGTH_LONG);
+        }
+    }
+
+    private void startEditProductActivity(Long id) {
+        Log.i(TAG_CLASSNAME, String.format("Load to product with id:%s.", id));
+        Bundle args = new Bundle();
+        args.putLong(ViewConstant.PARAM_ID_PRODUCT, id);
+
+        Intent intent = new Intent(this, EditProductActivity.class);
+        intent.putExtras(args);
+        startActivity(intent, args);
     }
 }
