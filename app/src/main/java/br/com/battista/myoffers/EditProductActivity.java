@@ -1,7 +1,10 @@
 package br.com.battista.myoffers;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -94,6 +97,13 @@ public class EditProductActivity extends AppCompatActivity {
     }
 
     public void addProduct(View view) {
+        if (!isOnline()) {
+            Toast.makeText(this,
+                    "Para cadastrar/editar um produto é necessário está conectado a internet!",
+                    Toast.LENGTH_LONG).show();
+            return;
+        }
+
         offer = fillOfferByData();
 
         final Activity currentActivity = this;
@@ -128,6 +138,13 @@ public class EditProductActivity extends AppCompatActivity {
             }
         }.execute();
 
+    }
+
+    public boolean isOnline() {
+        ConnectivityManager cm =
+                (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        return netInfo != null && netInfo.isConnectedOrConnecting();
     }
 
     private void fillDataUI(Offer offer) {

@@ -1,6 +1,10 @@
 package br.com.battista.myoffers;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
@@ -12,6 +16,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.common.base.Strings;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 
 import java.util.List;
 
@@ -74,6 +80,27 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void scanProduct(View view) {
+        Log.i(TAG_CLASSNAME, "Scan barcode now!");
+        IntentIntegrator scanIntegrator = new IntentIntegrator(this);
+        scanIntegrator.initiateScan();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        IntentResult scanningResult = IntentIntegrator.parseActivityResult(requestCode,
+                resultCode, intent);
+
+        if (scanningResult != null) {
+            txtProduct = (EditText) findViewById(R.id.txtProduct);
+            String barcode = scanningResult.getContents();
+            Log.i(TAG_CLASSNAME, String.format("Result to scan barcode:", barcode));
+            txtProduct.setText(barcode);
+        } else {
+            Log.i(TAG_CLASSNAME, "No scan data received!");
+            Toast.makeText(getApplicationContext(),
+                    "Erro ao scanear o código de barra. Por favor, tente novamente ou digite manualmente.",
+                    Toast.LENGTH_LONG).show();
+        }
 
     }
 
@@ -91,14 +118,20 @@ public class MainActivity extends AppCompatActivity {
         }
 
         final Long lCodeProduct = Long.valueOf(codeProduct);
+        final Activity currentActivity = this;
         new StartupApp(this, "", false) {
             private Offer offer = null;
-            private Boolean loadFromServer = Boolean.FALSE;
 
             @Override
             protected void onPostExecute(Boolean result) {
                 if (offer == null) {
-                    startEditProductActivity(lCodeProduct);
+                    if (isOnline()) {
+                        startEditProductActivity(lCodeProduct);
+                    } else {
+                        Toast.makeText(currentActivity,
+                                "Para cadastrar um novo produto é necessário está conectado a internet!",
+                                Toast.LENGTH_LONG).show();
+                    }
                 } else {
                     startProductActivity(offer.getId());
                 }
@@ -109,15 +142,20 @@ public class MainActivity extends AppCompatActivity {
             protected Boolean doInBackground(Void... params) {
                 try {
                     OfferController offerController = new OfferController();
-                    loadFromServer = offerController.loadFromServerAndSaveOffer(lCodeProduct);
-                    if (loadFromServer) {
-                        offer = offerController.loadFromDatabaseByCodeProduct(lCodeProduct);
-                    }
+                    offerController.loadFromServerAndSaveOffer(lCodeProduct);
+                    offer = offerController.loadFromDatabaseByCodeProduct(lCodeProduct);
                 } catch (Exception e) {
                     Log.e(TAG_CLASSNAME, e.getLocalizedMessage(), e);
                     return false;
                 }
                 return true;
+            }
+
+            public boolean isOnline() {
+                ConnectivityManager cm =
+                        (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+                NetworkInfo netInfo = cm.getActiveNetworkInfo();
+                return netInfo != null && netInfo.isConnectedOrConnecting();
             }
         }.execute();
 

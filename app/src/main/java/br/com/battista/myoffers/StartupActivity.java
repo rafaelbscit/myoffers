@@ -1,7 +1,10 @@
 package br.com.battista.myoffers;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -21,7 +24,9 @@ public class StartupActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        deleteDatabase("MyOffers.db");
+        if (isOnline()) {
+            deleteDatabase("MyOffers.db");
+        }
         ActiveAndroid.initialize(this);
         setContentView(R.layout.activity_startup);
 
@@ -53,6 +58,13 @@ public class StartupActivity extends AppCompatActivity {
                 return true;
             }
         }.execute();
+    }
+
+    public boolean isOnline() {
+        ConnectivityManager cm =
+                (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        return netInfo != null && netInfo.isConnectedOrConnecting();
     }
 
     public void openMainActivity(View view) {
