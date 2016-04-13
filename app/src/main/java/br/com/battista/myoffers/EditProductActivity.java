@@ -78,13 +78,13 @@ public class EditProductActivity extends AppCompatActivity {
                 if (result) {
                     Toast.makeText(currentActivity,
                             String.format("Sucesso ao criar um novo produco com código:%s!",
-                                    offer.getCodeProduct()), Toast.LENGTH_LONG);
+                                    offer.getCodeProduct()), Toast.LENGTH_LONG).show();
                     startActivity(new Intent(currentActivity, MainActivity.class));
                 } else {
                     Toast.makeText(currentActivity,
                             String.format("Error ao criar um novo produco com código:%s! " +
                                             "Favor verificar sua conexão com a internet!",
-                                    offer.getCodeProduct()), Toast.LENGTH_LONG);
+                                    offer.getCodeProduct()), Toast.LENGTH_LONG).show();
                 }
                 getProgress().dismiss();
             }

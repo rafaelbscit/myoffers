@@ -34,9 +34,14 @@ public class MainActivity extends AppCompatActivity {
 
         setSupportActionBar((Toolbar) findViewById(R.id.tlbApp));
 
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
         List<Offer> offers = loadDataFromDatabase();
         configureUI(offers);
-
     }
 
     private List<Offer> loadDataFromDatabase() {
@@ -56,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
 
         ProductRecyclerViewAdapter recyclerViewAdapter =
                 new ProductRecyclerViewAdapter(this, offers);
+        recyclerViewAdapter.notifyDataSetChanged();
         recyclerView.setAdapter(recyclerViewAdapter);
     }
 

@@ -31,7 +31,7 @@ public class OfferController {
             for (int count = 0; count < offers.size(); count++) {
                 Offer offer = offers.get(count);
                 repository.save(offer);
-                if (count % 10 == 0 && count> 1) {
+                if (count % 10 == 0 && count > 1) {
                     ActiveAndroid.setTransactionSuccessful(transaction);
                 }
             }
@@ -91,7 +91,7 @@ public class OfferController {
         if (offer != null && offer.getId() != null) {
             Log.i(TAG_CLASSNAME, String.format("Save new offer with id: %s in database.",
                     offer.getId()));
-            saveOfferInDatabase(offer);
+            loadFromServerAndSaveOffers();
         } else {
             Log.i(TAG_CLASSNAME, String.format("Error in creating a new offer with code: %s.", offer.getCodeProduct()));
         }

@@ -18,7 +18,9 @@ public enum HttpStatus {
     MULTIPLE_CHOICES(300, "Multiple Choices"),
     MOVED_PERMANENTLY(301, "Moved Permanently"),
     FOUND(302, "Found"),
-    /** @deprecated */
+    /**
+     * @deprecated
+     */
     @Deprecated
     MOVED_TEMPORARILY(302, "Moved Temporarily"),
     SEE_OTHER(303, "See Other"),
@@ -45,13 +47,19 @@ public enum HttpStatus {
     REQUESTED_RANGE_NOT_SATISFIABLE(416, "Requested range not satisfiable"),
     EXPECTATION_FAILED(417, "Expectation Failed"),
     I_AM_A_TEAPOT(418, "I\'m a teapot"),
-    /** @deprecated */
+    /**
+     * @deprecated
+     */
     @Deprecated
     INSUFFICIENT_SPACE_ON_RESOURCE(419, "Insufficient Space On Resource"),
-    /** @deprecated */
+    /**
+     * @deprecated
+     */
     @Deprecated
     METHOD_FAILURE(420, "Method Failure"),
-    /** @deprecated */
+    /**
+     * @deprecated
+     */
     @Deprecated
     DESTINATION_LOCKED(421, "Destination Locked"),
     UNPROCESSABLE_ENTITY(422, "Unprocessable Entity"),
@@ -102,9 +110,9 @@ public enum HttpStatus {
         HttpStatus[] arr$ = values();
         int len$ = arr$.length;
 
-        for(int i$ = 0; i$ < len$; ++i$) {
+        for (int i$ = 0; i$ < len$; ++i$) {
             HttpStatus status = arr$[i$];
-            if(status.value == statusCode) {
+            if (status.value == statusCode) {
                 return status;
             }
         }
@@ -126,15 +134,17 @@ public enum HttpStatus {
         }
 
         public int value() {
-            return this.val
-f(int status) {
+            return this.value;
+        }
+
+        public static HttpStatus.Series valueOf(int status) {
             int seriesCode = status / 100;
             HttpStatus.Series[] arr$ = values();
             int len$ = arr$.length;
 
-            for(int i$ = 0; i$ < len$; ++i$) {
+            for (int i$ = 0; i$ < len$; ++i$) {
                 HttpStatus.Series series = arr$[i$];
-                if(series.value == seriesCode) {
+                if (series.value == seriesCode) {
                     return series;
                 }
             }
@@ -142,11 +152,7 @@ f(int status) {
             throw new IllegalArgumentException("No matching constant for [" + status + "]");
         }
 
-        public static HttpStatus.Series valueOf(HttpStat
-ue;
-        }
-
-        public static HttpStatus.Series valueOus status) {
+        public static HttpStatus.Series valueOf(HttpStatus status) {
             return valueOf(status.value);
         }
     }

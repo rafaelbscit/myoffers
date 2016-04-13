@@ -16,7 +16,7 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -214,39 +214,41 @@
                 android:textSize="11sp"
                 android:textStyle="italic" />
 
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:layout_alignParentBottom="true">
+
+                    <Button
+                        style="@style/ButtonAction"
+                        android:layout_marginLeft="8dp"
+                        android:drawableLeft="@drawable/btn_remove_product"
+                        android:onClick="cancelEditProduct"
+                        android:text="@string/label_button_cancel" />
+
+                    <View
+                        android:layout_width="4dp"
+                        android:layout_height="wrap_content" />
+
+                    <Button
+                        style="@style/ButtonAction"
+                        android:layout_marginLeft="8dp"
+                        android:drawableLeft="@drawable/btn_add_product"
+                        android:onClick="addProduct"
+                        android:text="@string/label_button_add" />
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
         </LinearLayout>
 
     </ScrollView>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:layout_alignParentBottom="true">
-
-            <Button
-                style="@style/ButtonAction"
-                android:layout_marginLeft="8dp"
-                android:drawableLeft="@drawable/btn_remove_product"
-                android:onClick="cancelEditProduct"
-                android:text="@string/label_button_cancel" />
-
-            <View
-                android:layout_width="4dp"
-                android:layout_height="wrap_content" />
-
-            <Button
-                style="@style/ButtonAction"
-                android:layout_marginLeft="8dp"
-                android:drawableLeft="@drawable/btn_add_product"
-                android:onClick="addProduct"
-                android:text="@string/label_button_add" />
-
-        </LinearLayout>
-
-    </RelativeLayout>
 
 </LinearLayout>
