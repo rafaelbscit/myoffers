@@ -28,9 +28,9 @@ Foi implementada seguindo o padrão de aplicação **Google Android**.
 
 ### Versão
 
-**App:** 1.0.0
-**MinSdkVersion:** 16
-**TargetSdkVersion:** 23
+- **App:** 1.0.0
+- **MinSdkVersion:** 16
+- **TargetSdkVersion:** 23
 
 ## Como usar
 
@@ -46,7 +46,7 @@ $ gradle :app:assembleDebug
 
 ## Download apk
 
-- Link:
+- Link: [MyOffers.zip]: <https://github.com/rafaelbscit/myoffers/blob/master/myoffers.zip>
 
 ## Contatos
 
