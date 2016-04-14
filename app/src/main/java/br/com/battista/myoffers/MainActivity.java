@@ -95,6 +95,7 @@ public class MainActivity extends AppCompatActivity {
             String barcode = scanningResult.getContents();
             Log.i(TAG_CLASSNAME, String.format("Result to scan barcode:", barcode));
             txtProduct.setText(barcode);
+            loadProductByBarcode(barcode);
         } else {
             Log.i(TAG_CLASSNAME, "No scan data received!");
             Toast.makeText(getApplicationContext(),
@@ -117,6 +118,11 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
+        loadProductByBarcode(codeProduct);
+
+    }
+
+    private void loadProductByBarcode(String codeProduct) {
         final Long lCodeProduct = Long.valueOf(codeProduct);
         final Activity currentActivity = this;
         new StartupApp(this, "", false) {
@@ -158,7 +164,6 @@ public class MainActivity extends AppCompatActivity {
                 return netInfo != null && netInfo.isConnectedOrConnecting();
             }
         }.execute();
-
     }
 
     private void startProductActivity(Long id) {
