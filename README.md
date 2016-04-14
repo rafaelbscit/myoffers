@@ -46,7 +46,7 @@ $ gradle :app:assembleDebug
 
 ## Download apk
 
-- Link: [MyOffers.zip]: <https://github.com/rafaelbscit/myoffers/blob/master/myoffers.zip>
+- Link: [MyOffers.zip]
 
 ## Contatos
 
@@ -58,3 +58,8 @@ $ gradle :app:assembleDebug
 MIT
 
 **Free Source Code, Hell Yeah!**
+
+[//]: # (These are reference links used in the body of this note and get stripped out when the markdown processor does its job. There is no need to format nicely because it shouldn't be seen. Thanks SO - http://stackoverflow.com/questions/4823468/store-comments-in-markdown-syntax)
+
+
+[MyOffers.zip]: <https://github.com/rafaelbscit/myoffers/blob/master/myoffers.zip>
