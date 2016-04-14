@@ -55,7 +55,10 @@ $ gradle :app:assembleDebug
 
 ## License
 
-MIT
+GNU GENERAL PUBLIC LICENSE
+
+
+
 
 **Free Source Code, Hell Yeah!**
 
