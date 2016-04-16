@@ -1,4 +1,4 @@
-package br.com.battista.myoffers.view.fragments;
+package br.com.battista.myoffers.view.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -29,7 +29,7 @@ public class ProductRecyclerViewAdapter extends RecyclerView.Adapter<ProductRecy
     public ProductRecyclerViewHolders onCreateViewHolder(ViewGroup parent, int viewType) {
 
         View productLayoutView = LayoutInflater.from(parent.getContext()).
-                inflate(R.layout.fragment_product, null);
+                inflate(R.layout.fragment_product, parent, false);
         return new ProductRecyclerViewHolders(productLayoutView);
     }
 

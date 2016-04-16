@@ -13,7 +13,9 @@ import android.widget.Toast;
 
 import com.activeandroid.ActiveAndroid;
 
+import br.com.battista.myoffers.constants.SharedPreferencesKeys;
 import br.com.battista.myoffers.controller.OfferController;
+import br.com.battista.myoffers.controller.SharedPreferencesController;
 import br.com.battista.myoffers.view.tasks.StartupApp;
 
 public class StartupActivity extends AppCompatActivity {
@@ -26,6 +28,7 @@ public class StartupActivity extends AppCompatActivity {
 
         if (isOnline()) {
             deleteDatabase("MyOffers.db");
+            saveSharedPreferences(this);
         }
         ActiveAndroid.initialize(this);
         setContentView(R.layout.activity_startup);
@@ -41,6 +44,7 @@ public class StartupActivity extends AppCompatActivity {
                             Toast.LENGTH_LONG).show();
                     currentActivity.finish();
                 } else {
+
                     Log.i(TAG_CLASSNAME, "Load next activity Main!");
                     startActivity(new Intent(currentActivity, MainActivity.class));
                 }
@@ -58,6 +62,12 @@ public class StartupActivity extends AppCompatActivity {
                 return true;
             }
         }.execute();
+    }
+
+    private void saveSharedPreferences(Activity currentActivity) {
+        SharedPreferencesController sharedPreferencesController = new SharedPreferencesController(currentActivity);
+        sharedPreferencesController.putString(SharedPreferencesKeys.USER_LOCATION_CITY_KEY, "Belo Horizonte");
+        sharedPreferencesController.putString(SharedPreferencesKeys.USER_LOCATION_STATE_KEY, "MG");
     }
 
     public boolean isOnline() {

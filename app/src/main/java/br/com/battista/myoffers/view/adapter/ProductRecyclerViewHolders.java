@@ -1,4 +1,4 @@
-package br.com.battista.myoffers.view.fragments;
+package br.com.battista.myoffers.view.adapter;
 
 import android.content.Context;
 import android.content.Intent;

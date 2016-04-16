@@ -21,6 +21,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/btnAddProduct"
         android:layout_centerHorizontal="true"
+        android:fontFamily="sans-serif-light"
         android:padding="5dp"
         android:text="Alimentos e Bebidas: Biscoito Amanteigado Aymore"
         android:textSize="12sp"

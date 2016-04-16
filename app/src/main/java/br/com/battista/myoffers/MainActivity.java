@@ -24,7 +24,7 @@ import java.util.List;
 import br.com.battista.myoffers.constants.ViewConstant;
 import br.com.battista.myoffers.controller.OfferController;
 import br.com.battista.myoffers.model.Offer;
-import br.com.battista.myoffers.view.fragments.ProductRecyclerViewAdapter;
+import br.com.battista.myoffers.view.adapter.ProductRecyclerViewAdapter;
 import br.com.battista.myoffers.view.tasks.StartupApp;
 
 public class MainActivity extends AppCompatActivity {
@@ -132,7 +132,7 @@ public class MainActivity extends AppCompatActivity {
             protected void onPostExecute(Boolean result) {
                 if (offer == null) {
                     if (isOnline()) {
-                        startEditProductActivity(lCodeProduct);
+                        startAddProductActivity(lCodeProduct);
                     } else {
                         Toast.makeText(currentActivity,
                                 "Para cadastrar um novo produto é necessário está conectado a internet!",
@@ -175,12 +175,12 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent, args);
     }
 
-    private void startEditProductActivity(Long lCodeProduct) {
-        Log.i(TAG_CLASSNAME, String.format("Load to product with code:%s.", lCodeProduct));
+    private void startAddProductActivity(Long lCodeProduct) {
+        Log.i(TAG_CLASSNAME, String.format("Add product with code:%s.", lCodeProduct));
         Bundle args = new Bundle();
         args.putLong(ViewConstant.PARAM_CODE_PRODUCT, lCodeProduct);
 
-        Intent intent = new Intent(this, EditProductActivity.class);
+        Intent intent = new Intent(this, AddProductActivity.class);
         intent.putExtras(args);
         startActivity(intent, args);
     }

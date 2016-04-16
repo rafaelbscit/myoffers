@@ -6,6 +6,7 @@ import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
 
 import java.io.Serializable;
+import java.util.List;
 
 import br.com.battista.myoffers.database.contract.MyOffersContract;
 
@@ -17,19 +18,24 @@ public class Offer extends BaseEntity implements Serializable {
     @Column(name = MyOffersContract.OfferEntry.COLUMN_NAME_NAME, notNull = true)
     private String name;
 
-    @Column(name = MyOffersContract.OfferEntry.COLUMN_NAME_CATEGORY)
+    @Column(name = MyOffersContract.OfferEntry.COLUMN_NAME_CATEGORY, notNull = true)
     private String category;
 
-    @Column(name = MyOffersContract.OfferEntry.COLUMN_NAME_VENDOR)
-    private String vendor;
+    private List<Vendor> vendors;
 
-    @Column(name = MyOffersContract.OfferEntry.COLUMN_NAME_PRICE)
-    private Double price;
+    @Column(name = MyOffersContract.OfferEntry.COLUMN_NAME_AVERAGE_PRICE, notNull = false)
+    private Double averagePrice;
 
-    @Column(name = MyOffersContract.OfferEntry.COLUMN_NAME_BRAND)
+    @Column(name = MyOffersContract.OfferEntry.COLUMN_NAME_BRAND, notNull = false)
     private String brand;
 
-    @Column(name = MyOffersContract.OfferEntry.COLUMN_NAME_CODE_PRODUCT, notNull = true, index = true)
+    @Column(name = MyOffersContract.OfferEntry.COLUMN_NAME_REVISE, notNull = true)
+    private Boolean revise = Boolean.FALSE;
+
+    @Column(name = MyOffersContract.OfferEntry.COLUMN_NAME_DENOUNCE, notNull = true)
+    private Boolean denounce = Boolean.FALSE;
+
+    @Column(name = MyOffersContract.OfferEntry.COLUMN_NAME_CODE_PRODUCT, notNull = true)
     private Long codeProduct;
 
     public String getCategory() {
@@ -40,20 +46,13 @@ public class Offer extends BaseEntity implements Serializable {
         this.category = category;
     }
 
-    public String getVendor() {
-        return vendor;
+    public Double getAveragePrice() {
+        return averagePrice;
     }
 
-    public void setVendor(String vendor) {
-        this.vendor = vendor;
-    }
 
-    public Double getPrice() {
-        return price;
-    }
-
-    public void setPrice(Double price) {
-        this.price = price;
+    public void setAveragePrice(Double averagePrice) {
+        this.averagePrice = averagePrice;
     }
 
     public String getBrand() {
@@ -72,6 +71,35 @@ public class Offer extends BaseEntity implements Serializable {
         this.name = name;
     }
 
+    public List<Vendor> getVendors() {
+        return vendors;
+    }
+
+    public void loadVendors() {
+        vendors = getMany(Vendor.class, MyOffersContract.VendorEntry.COLUMN_NAME_VENDOR);
+    }
+
+    public void setVendors(List<Vendor> vendors) {
+        this.vendors = vendors;
+    }
+
+    public Boolean getRevise() {
+        return revise;
+    }
+
+    public void setRevise(Boolean revise) {
+        this.revise = revise;
+    }
+
+    public Boolean getDenounce() {
+        return denounce;
+    }
+
+    public void setDenounce(Boolean denounce) {
+        this.denounce = denounce;
+    }
+
+
     public Offer name(String name) {
         this.name = name;
         return this;
@@ -82,13 +110,8 @@ public class Offer extends BaseEntity implements Serializable {
         return this;
     }
 
-    public Offer vendor(String vendor) {
-        this.vendor = vendor;
-        return this;
-    }
-
-    public Offer price(Double price) {
-        this.price = price;
+    public Offer averagePrice(Double averagePrice) {
+        this.averagePrice = averagePrice;
         return this;
     }
 
@@ -96,6 +119,7 @@ public class Offer extends BaseEntity implements Serializable {
         this.brand = brand;
         return this;
     }
+
 
     public Long getCodeProduct() {
         return codeProduct;
@@ -124,9 +148,11 @@ public class Offer extends BaseEntity implements Serializable {
                 .add("id", getId())
                 .add("name", name)
                 .add("category", category)
-                .add("vendor", vendor)
-                .add("price", price)
+                .add("vendors", vendors)
+                .add("averagePrice", averagePrice)
                 .add("brand", brand)
+                .add("revise", revise)
+                .add("denounce", denounce)
                 .add("codeProduct", codeProduct)
                 .toString();
     }
@@ -138,6 +164,21 @@ public class Offer extends BaseEntity implements Serializable {
 
     public Offer codeProduct(Long codeProduct) {
         this.codeProduct = codeProduct;
+        return this;
+    }
+
+    public Offer revise(Boolean revise) {
+        this.revise = revise;
+        return this;
+    }
+
+    public Offer denounce(Boolean denounce) {
+        this.denounce = denounce;
+        return this;
+    }
+
+    public Offer vendors(List<Vendor> vendors) {
+        this.vendors = vendors;
         return this;
     }
 }

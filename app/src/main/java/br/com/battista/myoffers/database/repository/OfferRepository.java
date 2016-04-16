@@ -56,6 +56,7 @@ public class OfferRepository implements BaseRepository<Offer> {
         Log.i(TAG_CLASSNAME, "Find all offers.");
         return new Select()
                 .from(Offer.class)
+                .where("denounce = ?", false)
                 .orderBy(MyOffersContract.OfferEntry.COLUMN_NAME_UPDATED_AT + " DESC")
                 .execute();
     }

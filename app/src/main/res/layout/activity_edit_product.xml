@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="br.com.battista.myoffers.EditProductActivity">
+    tools:context="br.com.battista.myoffers.ProductActivity">
 
     <fragment
         android:id="@+id/fgmMainToolbar"
@@ -19,10 +19,8 @@
         android:layout_height="match_parent">
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="16dp">
+            style="@style/BodyStyle"
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -51,35 +49,18 @@
 
             </LinearLayout>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginBottom="5dp"
-                android:layout_marginTop="5dp"
-                android:background="@color/colorPrimaryDark" />
-
-            <LinearLayout
+            <TextView
+                android:id="@+id/lblNameProduct"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:labelFor="@+id/txtNameProduct"
-                    android:text="@string/label_name_product"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
-
-                <EditText
-                    android:id="@+id/txtNameProduct"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:inputType="textAutoComplete"
-                    android:maxLength="50" />
-
-            </LinearLayout>
+                android:layout_marginTop="5dp"
+                android:background="@color/colorPrimaryDark"
+                android:gravity="center_horizontal"
+                android:padding="5dp"
+                android:text="Caneca Java"
+                android:textColor="@color/colorAccent"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
             <TableLayout
                 android:id="@+id/tblProduct"
@@ -99,8 +80,8 @@
                         android:layout_margin="5dp"
                         android:layout_weight="1">
 
-                        <ImageButton
-                            android:id="@+id/btnAddImgProduct"
+                        <ImageView
+                            android:id="@+id/imgProduct"
                             android:layout_width="fill_parent"
                             android:layout_height="150dp"
                             android:layout_margin="3dp"
@@ -108,7 +89,6 @@
                             android:padding="3dp"
                             android:scaleType="centerCrop"
                             android:src="@drawable/new_product" />
-
                     </RelativeLayout>
 
                     <LinearLayout
@@ -122,15 +102,16 @@
                         <TextView
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
-                            android:labelFor="@+id/spnCategory"
+                            android:labelFor="@+id/lblCategory"
                             android:text="@string/label_category"
                             android:textSize="16sp"
                             android:textStyle="bold" />
 
-                        <Spinner
-                            android:id="@+id/spnCategory"
+                        <TextView
+                            android:id="@+id/lblCategory"
                             android:layout_width="fill_parent"
-                            android:layout_height="wrap_content" />
+                            android:layout_height="wrap_content"
+                            android:text="Casa" />
 
                         <View
                             android:layout_width="match_parent"
@@ -141,17 +122,16 @@
                         <TextView
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
-                            android:labelFor="@+id/txtBrand"
+                            android:labelFor="@+id/lblBrand"
                             android:text="@string/label_brand"
                             android:textSize="16sp"
                             android:textStyle="bold" />
 
-                        <EditText
-                            android:id="@+id/txtBrand"
+                        <TextView
+                            android:id="@+id/lblBrand"
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
-                            android:inputType="textAutoComplete"
-                            android:maxLength="30" />
+                            android:text="Caneca" />
 
                         <View
                             android:layout_width="match_parent"
@@ -162,17 +142,16 @@
                         <TextView
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
-                            android:labelFor="@+id/txtVendor"
-                            android:text="@string/label_vendor"
+                            android:labelFor="@+id/lblUpdatedAt"
+                            android:text="@string/label_updated_at"
                             android:textSize="16sp"
                             android:textStyle="bold" />
 
-                        <EditText
-                            android:id="@+id/txtVendor"
+                        <TextView
+                            android:id="@+id/lblUpdatedAt"
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
-                            android:inputType="textAutoComplete"
-                            android:maxLength="30" />
+                            android:text="20/04/2016 18:20" />
 
                         <View
                             android:layout_width="match_parent"
@@ -180,19 +159,12 @@
                             android:layout_marginBottom="10dp"
                             android:background="@color/colorPrimaryDark" />
 
-                        <TextView
-                            android:layout_width="fill_parent"
+                        <CheckBox
+                            android:id="@+id/chkRevise"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:labelFor="@+id/txtPrice"
-                            android:text="@string/label_price"
-                            android:textSize="16sp"
-                            android:textStyle="bold" />
-
-                        <EditText
-                            android:id="@+id/txtPrice"
-                            android:layout_width="fill_parent"
-                            android:layout_height="wrap_content"
-                            android:inputType="numberDecimal" />
+                            android:text="@string/label_request_revise"
+                            android:textSize="16sp" />
 
                     </LinearLayout>
 
@@ -200,17 +172,78 @@
 
             </TableLayout>
 
+
+            <TextView
+                android:id="@+id/lblLocation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:labelFor="@+id/lblVendor"
+                android:text="MG - Belo Horizonte"
+                android:textAlignment="center"
+                android:textAllCaps="true"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:padding="4dp"
+                    android:text="@string/label_vendor"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="8dp"
+                    android:layout_weight="1"
+                    android:padding="4dp"
+                    android:text="@string/label_price"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="10dp"
+                android:background="@color/colorPrimaryDark" />
+
+            <android.support.v7.widget.RecyclerView xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/rvwEditListVendor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layoutManager="LinearLayoutManager"
+                tools:listitem="@layout/fragment_edit_vendor" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="20dp"
+                android:background="@color/colorPrimaryDark" />
+
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/label_desc_img_product"
+                android:text="@string/label_desc_add_product"
                 android:textSize="11sp"
                 android:textStyle="italic" />
 
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/label_desc_add_product"
+                android:text="@string/label_desc_request_revise"
                 android:textSize="11sp"
                 android:textStyle="italic" />
 
@@ -239,8 +272,8 @@
                         style="@style/ButtonAction"
                         android:layout_marginLeft="8dp"
                         android:drawableLeft="@drawable/btn_add_product"
-                        android:onClick="addProduct"
-                        android:text="@string/label_button_add" />
+                        android:onClick="saveProduct"
+                        android:text="@string/label_button_save" />
 
                 </LinearLayout>
 
