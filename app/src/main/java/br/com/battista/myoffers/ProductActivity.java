@@ -6,20 +6,19 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.text.NumberFormat;
 import java.util.List;
-import java.util.Locale;
 
 import br.com.battista.myoffers.constants.ViewConstant;
 import br.com.battista.myoffers.controller.OfferController;
 import br.com.battista.myoffers.model.Offer;
 import br.com.battista.myoffers.model.Vendor;
+import br.com.battista.myoffers.util.DateFormatUtil;
+import br.com.battista.myoffers.util.NumberFormatUtil;
 import br.com.battista.myoffers.view.adapter.VendorRecyclerViewAdapter;
 
 public class ProductActivity extends AppCompatActivity {
@@ -27,7 +26,6 @@ public class ProductActivity extends AppCompatActivity {
     public static final String TAG_CLASSNAME = ProductActivity.class.getSimpleName();
 
     private Long codeProduct;
-    private Locale locale = new Locale("pt", "BR");
 
     private TextView lblCodeProduct;
     private TextView lblNameProduct;
@@ -79,7 +77,7 @@ public class ProductActivity extends AppCompatActivity {
     private void configureListVendor(List<Vendor> vendors) {
 
         VendorRecyclerViewAdapter recyclerViewAdapter =
-                new VendorRecyclerViewAdapter(this, filterSizeListProducts(vendors));
+                new VendorRecyclerViewAdapter(filterSizeListProducts(vendors));
         recyclerView.setAdapter(recyclerViewAdapter);
         recyclerViewAdapter.notifyDataSetChanged();
     }
@@ -96,16 +94,9 @@ public class ProductActivity extends AppCompatActivity {
         lblNameProduct.setText(offer.getName());
         lblCategory.setText(offer.getCategory());
         lblBrand.setText(offer.getBrand());
-        lblUpdatedAt.setText(DateFormat.format("dd/MM/yyyy HH:mm", offer.getUpdatedAt()));
+        lblUpdatedAt.setText(DateFormatUtil.format(offer.getUpdatedAt()));
 
-        if (offer.getAveragePrice() != null) {
-            NumberFormat numberInstance = NumberFormat.getNumberInstance(locale);
-            numberInstance.setMinimumFractionDigits(2);
-            String price = numberInstance.format(offer.getAveragePrice());
-            lblAveragePrice.setText(price);
-        } else {
-            lblAveragePrice.setText("");
-        }
+        lblAveragePrice.setText(NumberFormatUtil.format(offer.getAveragePrice()));
     }
 
     private void loadUIViews() {

@@ -44,5 +44,6 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:23.3.0'
 
     compile 'com.google.zxing:android-integration:3.2.1'
+    compile 'joda-time:joda-time:2.9.3'
 
 }

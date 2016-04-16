@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import java.util.Set;
 
 import br.com.battista.myoffers.constants.SharedPreferencesKeys;
+import br.com.battista.myoffers.constants.ViewConstant;
 
 /**
  * Created by rabsouza on 15/04/16.
@@ -24,8 +25,8 @@ public class SharedPreferencesController {
             throw new IllegalArgumentException("Activyt can not be null!");
         }
 
-
-        sharedPref = activity.getPreferences(Context.MODE_PRIVATE);
+        sharedPref = activity.getApplicationContext()
+                .getSharedPreferences(ViewConstant.PARAM_SHARED_PACKAGED, Context.MODE_PRIVATE);
         editor = sharedPref.edit();
     }
 

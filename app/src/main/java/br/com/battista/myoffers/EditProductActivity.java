@@ -10,7 +10,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.text.format.DateFormat;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.TextView;
@@ -19,11 +18,8 @@ import android.widget.Toast;
 import com.activeandroid.util.Log;
 import com.google.common.base.Strings;
 
-import java.text.NumberFormat;
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 import br.com.battista.myoffers.constants.SharedPreferencesKeys;
 import br.com.battista.myoffers.constants.ViewConstant;
@@ -31,6 +27,8 @@ import br.com.battista.myoffers.controller.OfferController;
 import br.com.battista.myoffers.controller.SharedPreferencesController;
 import br.com.battista.myoffers.model.Offer;
 import br.com.battista.myoffers.model.Vendor;
+import br.com.battista.myoffers.util.DateFormatUtil;
+import br.com.battista.myoffers.util.NumberFormatUtil;
 import br.com.battista.myoffers.view.adapter.EditVendorRecyclerViewAdapter;
 import br.com.battista.myoffers.view.adapter.EditVendorRecyclerViewHolders;
 import br.com.battista.myoffers.view.tasks.StartupApp;
@@ -38,8 +36,6 @@ import br.com.battista.myoffers.view.tasks.StartupApp;
 public class EditProductActivity extends AppCompatActivity {
 
     public static final String TAG_CLASSNAME = EditProductActivity.class.getSimpleName();
-
-    private Locale locale = new Locale("pt", "BR");
 
     private TextView lblCodeProduct;
     private TextView lblNameProduct;
@@ -169,8 +165,8 @@ public class EditProductActivity extends AppCompatActivity {
 
         lblCategory.setText(offer.getCategory());
         lblBrand.setText(offer.getBrand());
-        lblUpdatedAt.setText(DateFormat.format("dd/MM/yyyy HH:mm", offer.getUpdatedAt()));
 
+        lblUpdatedAt.setText(DateFormatUtil.format(offer.getUpdatedAt()));
     }
 
     private void loadUIViews() {
@@ -209,27 +205,24 @@ public class EditProductActivity extends AppCompatActivity {
                 Vendor vendor = childHolder.getVendor();
                 android.util.Log.i(TAG_CLASSNAME, "Load vendor by recyclerView");
 
-                SharedPreferencesController sharedPreferencesController = new SharedPreferencesController(this);
-                vendor.setCity(sharedPreferencesController.getString(SharedPreferencesKeys.USER_LOCATION_CITY_KEY, ""));
-                vendor.setState(sharedPreferencesController.getString(SharedPreferencesKeys.USER_LOCATION_STATE_KEY, ""));
-
-                vendor.setCodeProduct(offer.getCodeProduct());
                 String nameVendor = childHolder.getTxtItemNameVendor().getText().toString();
-                vendor.setVendor(nameVendor);
-
                 String strPrice = childHolder.getTxtItemPriceVendor().getText().toString();
                 if (Strings.isNullOrEmpty(nameVendor) || Strings.isNullOrEmpty(strPrice)) {
                     continue;
                 }
-                try {
-                    NumberFormat numberInstance = NumberFormat.getNumberInstance(locale);
-                    numberInstance.setMinimumFractionDigits(2);
-                    Number number = numberInstance.parse(strPrice);
 
-                    vendor.setPrice(number.doubleValue());
-                } catch (ParseException e) {
-                    vendor.setPrice(Double.valueOf(strPrice.replaceAll("\\,", "\\.")));
+                SharedPreferencesController sharedPreferencesController = new SharedPreferencesController(this);
+                if (Strings.isNullOrEmpty(vendor.getState())) {
+                    vendor.setState(sharedPreferencesController.getString(SharedPreferencesKeys.USER_LOCATION_STATE_KEY, ""));
                 }
+                if (Strings.isNullOrEmpty(vendor.getCity())) {
+                    vendor.setCity(sharedPreferencesController.getString(SharedPreferencesKeys.USER_LOCATION_CITY_KEY, ""));
+                }
+
+                vendor.setCodeProduct(offer.getCodeProduct());
+                vendor.setVendor(nameVendor);
+                vendor.setPrice(NumberFormatUtil.parse(strPrice));
+
                 vendors.add(vendor);
             }
         }
@@ -240,14 +233,16 @@ public class EditProductActivity extends AppCompatActivity {
     private void configureListVendor(List<Vendor> vendors) {
 
         EditVendorRecyclerViewAdapter recyclerViewAdapter =
-                new EditVendorRecyclerViewAdapter(this, filterSizeListProducts(vendors));
+                new EditVendorRecyclerViewAdapter(filterSizeListProducts(vendors));
         recyclerView.setAdapter(recyclerViewAdapter);
         recyclerViewAdapter.notifyDataSetChanged();
     }
 
     private List<Vendor> filterSizeListProducts(List<Vendor> vendors) {
         if (vendors.size() > ViewConstant.MAX_VENDORS_GRID) {
-            return vendors.subList(0, ViewConstant.MAX_VENDORS_GRID);
+            List<Vendor> newVendors = new ArrayList<>(vendors.subList(0, ViewConstant.MAX_VENDORS_GRID));
+            newVendors.add(new Vendor());
+            return newVendors;
         }
         vendors.add(new Vendor());
         return vendors;

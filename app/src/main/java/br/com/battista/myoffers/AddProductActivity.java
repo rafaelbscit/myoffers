@@ -17,11 +17,8 @@ import android.widget.Toast;
 
 import com.activeandroid.util.Log;
 
-import java.text.NumberFormat;
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 import br.com.battista.myoffers.constants.SharedPreferencesKeys;
 import br.com.battista.myoffers.constants.ViewConstant;
@@ -29,12 +26,12 @@ import br.com.battista.myoffers.controller.OfferController;
 import br.com.battista.myoffers.controller.SharedPreferencesController;
 import br.com.battista.myoffers.model.Offer;
 import br.com.battista.myoffers.model.Vendor;
+import br.com.battista.myoffers.util.NumberFormatUtil;
 import br.com.battista.myoffers.view.tasks.StartupApp;
 
 public class AddProductActivity extends AppCompatActivity {
 
     public static final String TAG_CLASSNAME = EditProductActivity.class.getSimpleName();
-    private Locale locale = new Locale("pt", "BR");
     private TextView lblCodeProduct;
 
     private EditText txtNameProduct;
@@ -167,15 +164,7 @@ public class AddProductActivity extends AppCompatActivity {
         vendor.setState(sharedPreferencesController.getString(SharedPreferencesKeys.USER_LOCATION_STATE_KEY, ""));
 
         String strPrice = txtPrice.getText().toString();
-        try {
-            NumberFormat numberInstance = NumberFormat.getNumberInstance(locale);
-            numberInstance.setMinimumFractionDigits(2);
-            Number number = numberInstance.parse(strPrice);
-
-            vendor.setPrice(number.doubleValue());
-        } catch (ParseException e) {
-            vendor.setPrice(Double.valueOf(strPrice.replaceAll("\\,", "\\.")));
-        }
+        vendor.setPrice(NumberFormatUtil.parse(strPrice));
         return offer;
     }
 
