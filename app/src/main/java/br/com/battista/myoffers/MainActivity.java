@@ -125,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
     private void loadProductByBarcode(String codeProduct) {
         final Long lCodeProduct = Long.valueOf(codeProduct);
         final Activity currentActivity = this;
-        new StartupApp(this, "", false) {
+        new StartupApp(this, String.format("Carregando código de barra: %s...", lCodeProduct), false) {
             private Offer offer = null;
 
             @Override

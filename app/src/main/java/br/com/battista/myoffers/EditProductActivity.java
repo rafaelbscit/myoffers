@@ -115,7 +115,7 @@ public class EditProductActivity extends AppCompatActivity {
         offer = fillOfferByData();
 
         final Activity currentActivity = this;
-        new StartupApp(this, "", false) {
+        new StartupApp(this, String.format("Editando o produto: '%s'...", offer.getName()), false) {
 
             @Override
             protected void onPostExecute(Boolean result) {

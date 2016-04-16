@@ -1,6 +1,8 @@
 package br.com.battista.myoffers.controller;
 
 
+import android.database.sqlite.SQLiteException;
+
 import com.activeandroid.ActiveAndroid;
 import com.activeandroid.sqlbrite.BriteDatabase;
 import com.activeandroid.util.Log;
@@ -48,7 +50,12 @@ public class OfferController {
             }
             ActiveAndroid.setTransactionSuccessful(transaction);
         } finally {
-            ActiveAndroid.endTransaction(transaction);
+            try {
+                ActiveAndroid.endTransaction(transaction);
+            } catch (SQLiteException e) {
+                Log.e(TAG_CLASSNAME, e.getLocalizedMessage(), e);
+                System.exit(1);
+            }
         }
 
     }
@@ -138,7 +145,12 @@ public class OfferController {
             }
             ActiveAndroid.setTransactionSuccessful(transaction);
         } finally {
-            ActiveAndroid.endTransaction(transaction);
+            try {
+                ActiveAndroid.endTransaction(transaction);
+            } catch (SQLiteException e) {
+                Log.e(TAG_CLASSNAME, e.getLocalizedMessage(), e);
+                System.exit(1);
+            }
         }
     }
 }

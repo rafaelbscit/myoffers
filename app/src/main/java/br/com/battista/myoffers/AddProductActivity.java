@@ -92,7 +92,7 @@ public class AddProductActivity extends AppCompatActivity {
         offer = fillOfferByData();
 
         final Activity currentActivity = this;
-        new StartupApp(this, "", false) {
+        new StartupApp(this, String.format("Salvando o produto: '%s'...", offer.getName()), false) {
 
             @Override
             protected void onPostExecute(Boolean result) {
