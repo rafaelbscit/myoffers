@@ -17,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.activeandroid.util.Log;
+import com.google.common.base.Strings;
 
 import java.text.NumberFormat;
 import java.text.ParseException;
@@ -162,6 +163,10 @@ public class EditProductActivity extends AppCompatActivity {
         lblCodeProduct.setText(String.valueOf(offer.getCodeProduct()));
         lblNameProduct.setText(offer.getName());
 
+        Boolean revise = offer.getRevise();
+        chkRevise.setChecked(revise);
+        chkRevise.setEnabled(!revise);
+
         lblCategory.setText(offer.getCategory());
         lblBrand.setText(offer.getBrand());
         lblUpdatedAt.setText(DateFormat.format("dd/MM/yyyy HH:mm", offer.getUpdatedAt()));
@@ -202,15 +207,20 @@ public class EditProductActivity extends AppCompatActivity {
                 EditVendorRecyclerViewHolders childHolder = (EditVendorRecyclerViewHolders) recyclerView.findViewHolderForLayoutPosition(i);
 
                 Vendor vendor = childHolder.getVendor();
+                android.util.Log.i(TAG_CLASSNAME, "Load vendor by recyclerView");
 
                 SharedPreferencesController sharedPreferencesController = new SharedPreferencesController(this);
                 vendor.setCity(sharedPreferencesController.getString(SharedPreferencesKeys.USER_LOCATION_CITY_KEY, ""));
                 vendor.setState(sharedPreferencesController.getString(SharedPreferencesKeys.USER_LOCATION_STATE_KEY, ""));
 
                 vendor.setCodeProduct(offer.getCodeProduct());
-                vendor.setVendor(childHolder.getTxtItemNameVendor().getText().toString());
+                String nameVendor = childHolder.getTxtItemNameVendor().getText().toString();
+                vendor.setVendor(nameVendor);
 
                 String strPrice = childHolder.getTxtItemPriceVendor().getText().toString();
+                if (Strings.isNullOrEmpty(nameVendor) || Strings.isNullOrEmpty(strPrice)) {
+                    continue;
+                }
                 try {
                     NumberFormat numberInstance = NumberFormat.getNumberInstance(locale);
                     numberInstance.setMinimumFractionDigits(2);

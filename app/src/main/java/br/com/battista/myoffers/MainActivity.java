@@ -90,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
         IntentResult scanningResult = IntentIntegrator.parseActivityResult(requestCode,
                 resultCode, intent);
 
-        if (scanningResult != null) {
+        if (scanningResult != null && scanningResult.getContents() != null) {
             txtProduct = (EditText) findViewById(R.id.txtProduct);
             String barcode = scanningResult.getContents();
             Log.i(TAG_CLASSNAME, String.format("Result to scan barcode:", barcode));
