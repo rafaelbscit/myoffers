@@ -44,11 +44,10 @@ public class OfferController {
                 for (Vendor vendor : offer.getVendors()) {
                     vendorRepository.save(vendor);
                 }
-                if (count % 10 == 0 && count > 1) {
-                    ActiveAndroid.setTransactionSuccessful(transaction);
-                }
             }
-            ActiveAndroid.setTransactionSuccessful(transaction);
+            if (offers.size() > 0) {
+                ActiveAndroid.setTransactionSuccessful(transaction);
+            }
         } finally {
             try {
                 ActiveAndroid.endTransaction(transaction);
@@ -140,8 +139,10 @@ public class OfferController {
         try {
             Log.i(TAG_CLASSNAME, String.format("Save offer with id:%s in database!", offer.getId()));
             offerRepository.save(offer);
-            for (Vendor vendor : offer.getVendors()) {
-                vendorRepository.save(vendor);
+            if (offer.getVendors() != null) {
+                for (Vendor vendor : offer.getVendors()) {
+                    vendorRepository.save(vendor);
+                }
             }
             ActiveAndroid.setTransactionSuccessful(transaction);
         } finally {
