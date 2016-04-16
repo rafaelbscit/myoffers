@@ -6,7 +6,7 @@ cp ./app/build/outputs/apk/app-debug.apk ./app/build/outputs/apk/MyOffers.apk
 
 echo "Zip to apk"
 rm -rf MyOffers.zip
-zip -m MyOffers.zip ./app/build/outputs/apk/MyOffers.apk
+zip MyOffers.zip ./app/build/outputs/apk/MyOffers.apk
 
 echo "Add to git"
 git add MyOffers.zip
